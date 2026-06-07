@@ -26,4 +26,32 @@ final class RealFFTTests: XCTestCase {
         let lag = searchable.offset + 1
         XCTAssertTrue(abs(lag - period) <= 1, "expected lag ≈ \(period), got \(lag)")
     }
+
+    // Verifies EVERY lag (even AND odd) matches a brute-force circular autocorrelation.
+    // Guards against half-populated output (the even/odd packing concern).
+    func testAutocorrelationMatchesBruteForceAllLags() {
+        let n = 64
+        let fft = RealFFT(size: n)
+        var x = [Float](repeating: 0, count: n)
+        var seed: UInt64 = 0x9E3779B97F4A7C15
+        func rnd() -> Float {
+            seed = seed &* 6364136223846793005 &+ 1442695040888963407
+            return Float(Int32(truncatingIfNeeded: seed >> 33)) / Float(Int32.max)
+        }
+        for i in 0..<n { x[i] = rnd() }
+
+        var brute = [Float](repeating: 0, count: n)
+        for k in 0..<n {
+            var s: Float = 0
+            for i in 0..<n { s += x[i] * x[(i + k) % n] }
+            brute[k] = s
+        }
+
+        let ac = fft.generalizedAutocorrelation(x, exponent: 1.0)   // |X|^2 → standard autocorrelation
+        XCTAssertEqual(ac.count, n)
+        XCTAssertGreaterThan(ac[0], 0)
+        for k in 0..<n {
+            XCTAssertEqual(ac[k] / ac[0], brute[k] / brute[0], accuracy: 2e-3, "mismatch at lag \(k)")
+        }
+    }
 }
