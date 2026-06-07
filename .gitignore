@@ -1,0 +1,10 @@
+.DS_Store
+.superpowers/
+.build/
+TempoKeyCore/.build/
+DerivedData/
+build/
+*.xcuserstate
+xcuserdata/
+*.xcscmblueprint
+.swiftpm/
