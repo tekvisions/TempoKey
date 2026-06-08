@@ -1,10 +1,13 @@
 import Foundation
 
-struct KeySegment: Equatable {
-    let start: Double
-    let end: Double
-    let key: MusicalKey
-    let confidence: Double
+public struct KeySegment: Equatable {
+    public let start: Double
+    public let end: Double
+    public let key: MusicalKey
+    public let confidence: Double
+    public init(start: Double, end: Double, key: MusicalKey, confidence: Double) {
+        self.start = start; self.end = end; self.key = key; self.confidence = confidence
+    }
 }
 
 struct KeyAnalysis {

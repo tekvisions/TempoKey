@@ -5,7 +5,7 @@ public final class AnalysisEngine {
     public init(analysisRate: Double = 44100) { self.analysisRate = analysisRate }
 
     /// progress: 0…1. Runs synchronously; call off the main thread.
-    func analyze(url: URL, progress: ((Double) -> Void)? = nil) throws -> AnalysisResult {
+    public func analyze(url: URL, progress: ((Double) -> Void)? = nil) throws -> AnalysisResult {
         progress?(0.0)
         let decoded = try AudioDecoder(analysisRate: analysisRate).decode(url: url)
         progress?(0.3)
