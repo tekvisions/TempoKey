@@ -1,0 +1,480 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		397700737C22192DA1B57576 /* TempoTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFB29BC8FD4BFDD4BDB5CC1 /* TempoTimelineView.swift */; };
+		5083421A2FAA1F9B52120AD6 /* ThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C9929CF092B5B38E79CAC /* ThemeTests.swift */; };
+		63E2CCC37AD49601A6DA09FB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1210C4546A1BF8855264C228 /* AppState.swift */; };
+		6C3127CC1677DBCEA5DDC750 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8CD49989E60E437D5EA9C4 /* Theme.swift */; };
+		8EA614C4661DB1E85D228C19 /* TempoKeyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641F75875B3938F2B3AF847 /* TempoKeyApp.swift */; };
+		97849868AABEA7682371C433 /* KeyRibbonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F223E88045622112C832CF05 /* KeyRibbonView.swift */; };
+		AA63E95A636BE79504D51BE8 /* ImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49BDEF2B9E7551B1797DEE2 /* ImportView.swift */; };
+		AF7678A2715A633E868FBDE6 /* AnalyzingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EAFEB945EF6DDE818BC75D /* AnalyzingView.swift */; };
+		B1FE74AB5AA9722CE292ED04 /* SummaryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AF36E4441D5BEFEDB4528B /* SummaryHeaderView.swift */; };
+		BCD91E8B86EF4B28E791511C /* BeatTickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235E67D8E7D1FB1640935189 /* BeatTickView.swift */; };
+		C8764BAEC7DD118F1705140C /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F1A941C7039ED31918455 /* ReportView.swift */; };
+		CC1C7818A587C01C01864BAE /* TempoKeyCore in Frameworks */ = {isa = PBXBuildFile; productRef = C239E23EE73720E8007EFC55 /* TempoKeyCore */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E2B4AEFF7A9F3F4F05E121FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22AF1C6272E5FD9BD5DE1940 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 49124541553917895AAE808E;
+			remoteInfo = TempoKey;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1210C4546A1BF8855264C228 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		235E67D8E7D1FB1640935189 /* BeatTickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatTickView.swift; sourceTree = "<group>"; };
+		374F1A941C7039ED31918455 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
+		49DB2DBD7A351D53E939D0FE /* TempoKey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TempoKey.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		58AF36E4441D5BEFEDB4528B /* SummaryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryHeaderView.swift; sourceTree = "<group>"; };
+		5A183C827F73352468B12D0D /* TempoKeyAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TempoKeyAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A6C9929CF092B5B38E79CAC /* ThemeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTests.swift; sourceTree = "<group>"; };
+		7AEBA273CE6F2454C533B2D1 /* TempoKey.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TempoKey.entitlements; sourceTree = "<group>"; };
+		92EAFEB945EF6DDE818BC75D /* AnalyzingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzingView.swift; sourceTree = "<group>"; };
+		9641F75875B3938F2B3AF847 /* TempoKeyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoKeyApp.swift; sourceTree = "<group>"; };
+		A49BDEF2B9E7551B1797DEE2 /* ImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportView.swift; sourceTree = "<group>"; };
+		AD8CD49989E60E437D5EA9C4 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		BC6F06C0D6F87B278CE9BF94 /* TempoKey-Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TempoKey-Debug.entitlements"; sourceTree = "<group>"; };
+		C2D0D9F32B7CBEC924CF80D3 /* TempoKeyCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TempoKeyCore; path = TempoKeyCore; sourceTree = SOURCE_ROOT; };
+		DBFB29BC8FD4BFDD4BDB5CC1 /* TempoTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoTimelineView.swift; sourceTree = "<group>"; };
+		DED76460098CF25605BDFCF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F223E88045622112C832CF05 /* KeyRibbonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyRibbonView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		847908646D5D2494703792BE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC1C7818A587C01C01864BAE /* TempoKeyCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1C74511AA0546DE586237376 /* TempoKeyApp */ = {
+			isa = PBXGroup;
+			children = (
+				1210C4546A1BF8855264C228 /* AppState.swift */,
+				DED76460098CF25605BDFCF4 /* Info.plist */,
+				BC6F06C0D6F87B278CE9BF94 /* TempoKey-Debug.entitlements */,
+				7AEBA273CE6F2454C533B2D1 /* TempoKey.entitlements */,
+				9641F75875B3938F2B3AF847 /* TempoKeyApp.swift */,
+				AD8CD49989E60E437D5EA9C4 /* Theme.swift */,
+				84E1C4FC37204C4A4B9ED369 /* Views */,
+			);
+			path = TempoKeyApp;
+			sourceTree = "<group>";
+		};
+		214BAEEFAA04D0E5315B5F5F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49DB2DBD7A351D53E939D0FE /* TempoKey.app */,
+				5A183C827F73352468B12D0D /* TempoKeyAppTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		84E1C4FC37204C4A4B9ED369 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				92EAFEB945EF6DDE818BC75D /* AnalyzingView.swift */,
+				235E67D8E7D1FB1640935189 /* BeatTickView.swift */,
+				A49BDEF2B9E7551B1797DEE2 /* ImportView.swift */,
+				F223E88045622112C832CF05 /* KeyRibbonView.swift */,
+				374F1A941C7039ED31918455 /* ReportView.swift */,
+				58AF36E4441D5BEFEDB4528B /* SummaryHeaderView.swift */,
+				DBFB29BC8FD4BFDD4BDB5CC1 /* TempoTimelineView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C2E7578178F9B737DBCEB745 /* TempoKeyAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				5A6C9929CF092B5B38E79CAC /* ThemeTests.swift */,
+			);
+			path = TempoKeyAppTests;
+			sourceTree = "<group>";
+		};
+		F2A3EB240860E0DE92A1DD0D = {
+			isa = PBXGroup;
+			children = (
+				FB70F1E29E5A45FD10FEF4FE /* Packages */,
+				1C74511AA0546DE586237376 /* TempoKeyApp */,
+				C2E7578178F9B737DBCEB745 /* TempoKeyAppTests */,
+				214BAEEFAA04D0E5315B5F5F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FB70F1E29E5A45FD10FEF4FE /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				C2D0D9F32B7CBEC924CF80D3 /* TempoKeyCore */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		49124541553917895AAE808E /* TempoKey */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FEC46E96DE619DC0AC9144A4 /* Build configuration list for PBXNativeTarget "TempoKey" */;
+			buildPhases = (
+				A2B5035CF5797B2EC2464039 /* Sources */,
+				847908646D5D2494703792BE /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TempoKey;
+			packageProductDependencies = (
+				C239E23EE73720E8007EFC55 /* TempoKeyCore */,
+			);
+			productName = TempoKey;
+			productReference = 49DB2DBD7A351D53E939D0FE /* TempoKey.app */;
+			productType = "com.apple.product-type.application";
+		};
+		853FFE5269061B46C2167B70 /* TempoKeyAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5EB64015B15ABF42DCFAC86A /* Build configuration list for PBXNativeTarget "TempoKeyAppTests" */;
+			buildPhases = (
+				5E9585081C0D429737B3BED8 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EEF5130C77848C1FE31B91CF /* PBXTargetDependency */,
+			);
+			name = TempoKeyAppTests;
+			packageProductDependencies = (
+			);
+			productName = TempoKeyAppTests;
+			productReference = 5A183C827F73352468B12D0D /* TempoKeyAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		22AF1C6272E5FD9BD5DE1940 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 07C59F1555B0990E46D6D122 /* Build configuration list for PBXProject "TempoKey" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = F2A3EB240860E0DE92A1DD0D;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				E212955C46B2C3059CF9A267 /* XCLocalSwiftPackageReference "TempoKeyCore" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 214BAEEFAA04D0E5315B5F5F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				49124541553917895AAE808E /* TempoKey */,
+				853FFE5269061B46C2167B70 /* TempoKeyAppTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5E9585081C0D429737B3BED8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5083421A2FAA1F9B52120AD6 /* ThemeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2B5035CF5797B2EC2464039 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF7678A2715A633E868FBDE6 /* AnalyzingView.swift in Sources */,
+				63E2CCC37AD49601A6DA09FB /* AppState.swift in Sources */,
+				BCD91E8B86EF4B28E791511C /* BeatTickView.swift in Sources */,
+				AA63E95A636BE79504D51BE8 /* ImportView.swift in Sources */,
+				97849868AABEA7682371C433 /* KeyRibbonView.swift in Sources */,
+				C8764BAEC7DD118F1705140C /* ReportView.swift in Sources */,
+				B1FE74AB5AA9722CE292ED04 /* SummaryHeaderView.swift in Sources */,
+				8EA614C4661DB1E85D228C19 /* TempoKeyApp.swift in Sources */,
+				397700737C22192DA1B57576 /* TempoTimelineView.swift in Sources */,
+				6C3127CC1677DBCEA5DDC750 /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EEF5130C77848C1FE31B91CF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 49124541553917895AAE808E /* TempoKey */;
+			targetProxy = E2B4AEFF7A9F3F4F05E121FC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2AF6190343B56BC8ED457292 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		3B48E494378BEA82E7C94BCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TempoKeyApp/TempoKey.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = TempoKeyApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tempokey.app;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		ABE04BA34F4736CA21CD8DCC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		AEC5B47759E77F39BF1A212F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tempokey.TempoKeyAppTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TempoKey.app/Contents/MacOS/TempoKey";
+			};
+			name = Debug;
+		};
+		BE6D6A60EA0DA991CAD79E63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tempokey.TempoKeyAppTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TempoKey.app/Contents/MacOS/TempoKey";
+			};
+			name = Release;
+		};
+		CC7FF7A70030160F5B440A86 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "TempoKeyApp/TempoKey-Debug.entitlements";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = TempoKeyApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tempokey.app;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		07C59F1555B0990E46D6D122 /* Build configuration list for PBXProject "TempoKey" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABE04BA34F4736CA21CD8DCC /* Debug */,
+				2AF6190343B56BC8ED457292 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5EB64015B15ABF42DCFAC86A /* Build configuration list for PBXNativeTarget "TempoKeyAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AEC5B47759E77F39BF1A212F /* Debug */,
+				BE6D6A60EA0DA991CAD79E63 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FEC46E96DE619DC0AC9144A4 /* Build configuration list for PBXNativeTarget "TempoKey" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC7FF7A70030160F5B440A86 /* Debug */,
+				3B48E494378BEA82E7C94BCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		E212955C46B2C3059CF9A267 /* XCLocalSwiftPackageReference "TempoKeyCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = TempoKeyCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C239E23EE73720E8007EFC55 /* TempoKeyCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TempoKeyCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 22AF1C6272E5FD9BD5DE1940 /* Project object */;
+}

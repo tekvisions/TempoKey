@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!--
+      Debug-only entitlements. The App Sandbox is intentionally OMITTED here:
+      XCTest injects its test bundle into the host app, and the sandbox's
+      initializer aborts that injection when the bundle lives outside the
+      container. Release builds use TempoKey.entitlements, which DO enable the
+      sandbox with user-selected read-only file access (the shipping config).
+    -->
+    <key>com.apple.security.files.user-selected.read-only</key><true/>
+</dict>
+</plist>
