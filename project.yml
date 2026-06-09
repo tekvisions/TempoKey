@@ -1,0 +1,52 @@
+name: TempoKey
+options:
+  bundleIdPrefix: com.tempokey
+  deploymentTarget:
+    macOS: "14.0"
+packages:
+  TempoKeyCore:
+    path: TempoKeyCore
+targets:
+  TempoKey:
+    type: application
+    platform: macOS
+    sources: [TempoKeyApp]
+    dependencies:
+      - package: TempoKeyCore
+        product: TempoKeyCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.tempokey.app
+        INFOPLIST_FILE: TempoKeyApp/Info.plist
+        ENABLE_HARDENED_RUNTIME: YES
+        MARKETING_VERSION: "0.1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        SWIFT_VERSION: "5.9"
+      configs:
+        # XCTest injects its bundle into the host app; the App Sandbox aborts
+        # that injection (crash in _libsecinit_appsandbox). Debug therefore uses
+        # entitlements WITHOUT the sandbox so tests can run; Release ships the
+        # real sandboxed entitlements.
+        Debug:
+          CODE_SIGN_ENTITLEMENTS: TempoKeyApp/TempoKey-Debug.entitlements
+        Release:
+          CODE_SIGN_ENTITLEMENTS: TempoKeyApp/TempoKey.entitlements
+  TempoKeyAppTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources: [TempoKeyAppTests]
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+    dependencies:
+      - target: TempoKey
+schemes:
+  TempoKey:
+    build:
+      targets:
+        TempoKey: all
+        TempoKeyAppTests: [test]
+    run:
+      config: Debug
+    test:
+      targets: [TempoKeyAppTests]
