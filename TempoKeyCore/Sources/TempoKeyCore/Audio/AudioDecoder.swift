@@ -6,7 +6,19 @@ struct DecodedAudio {
     var duration: Double { Double(samples.count) / sampleRate }
 }
 
-enum AudioDecoderError: Error { case cannotCreateConverter, cannotCreateBuffer, readFailed }
+enum AudioDecoderError: LocalizedError {
+    case unreadableFile(String)
+    case cannotCreateConverter, cannotCreateBuffer, readFailed
+
+    var errorDescription: String? {
+        switch self {
+        case .unreadableFile(let name):
+            return "Couldn't read “\(name)”. It may not be a supported audio file."
+        case .cannotCreateConverter, .cannotCreateBuffer, .readFailed:
+            return "Couldn't process this audio file. It may be corrupted or in an unsupported format."
+        }
+    }
+}
 
 /// Decodes any AVFoundation-readable file to mono Float32 at a fixed analysis rate.
 final class AudioDecoder {
@@ -14,7 +26,12 @@ final class AudioDecoder {
     init(analysisRate: Double = 44100) { self.analysisRate = analysisRate }
 
     func decode(url: URL) throws -> DecodedAudio {
-        let file = try AVAudioFile(forReading: url)
+        let file: AVAudioFile
+        do {
+            file = try AVAudioFile(forReading: url)
+        } catch {
+            throw AudioDecoderError.unreadableFile(url.lastPathComponent)
+        }
         let inFormat = file.processingFormat
         let outFormat = AVAudioFormat(commonFormat: .pcmFormatFloat32,
                                       sampleRate: analysisRate,
@@ -49,8 +66,7 @@ final class AudioDecoder {
                 inputStatus.pointee = .haveData
                 return inBuf
             }
-            if let error { throw error }
-            if status == .error { throw AudioDecoderError.readFailed }
+            if error != nil || status == .error { throw AudioDecoderError.readFailed }
             if let ch = outBuf.floatChannelData, outBuf.frameLength > 0 {
                 output.append(contentsOf: UnsafeBufferPointer(start: ch[0], count: Int(outBuf.frameLength)))
             }

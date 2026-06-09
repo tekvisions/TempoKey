@@ -6,18 +6,24 @@ final class TempoTracker {
     private let minLag: Int
     private let maxLag: Int
     private let exponent: Float
-    private let decay: Double
+    private let effectiveDecay: Double      // per-update decay (already raised to updateInterval)
     private let gaussWidth: Double          // lag-domain std for histogram bump
     private let biasMeanBPM: Double
     private let biasWidth: Double           // lag-domain std for log-gaussian tempo bias
     private let numCandidates: Int
+    private let updateInterval: Int         // run the (expensive) autocorrelation every N OSS samples
 
     private var ring: [Float]
     private var ringFilled = 0
     private var ringHead = 0
+    private var sinceUpdate = 0
     private let fft: RealFFT
     private var histogram: [Double]         // indexed by lag
 
+    /// `updateInterval`: the autocorrelation/histogram update is the expensive step (a full
+    /// `ossLen`-point FFT). Running it every OSS sample dominates analysis time, so by default we
+    /// run it every 8 samples (~23 ms). `decay` is specified per-OSS-sample and raised to
+    /// `updateInterval` internally, so the histogram's time-based decay is unchanged by throttling.
     init(ossRate: Double,
          ossLen: Int = 1024,
          minTempo: Double = 50, maxTempo: Double = 200,
@@ -25,13 +31,15 @@ final class TempoTracker {
          decay: Double = 0.999,
          gaussWidth: Double = 5,
          biasMeanBPM: Double = 120, biasWidth: Double = 75,
-         numCandidates: Int = 10) {
+         numCandidates: Int = 10,
+         updateInterval: Int = 8) {
         self.ossRate = ossRate
         self.ossLen = ossLen
         self.minLag = Int((60.0 * ossRate / maxTempo).rounded(.down))
         self.maxLag = min(ossLen - 1, Int((60.0 * ossRate / minTempo).rounded(.up)))
         self.exponent = exponent
-        self.decay = decay
+        self.updateInterval = max(1, updateInterval)
+        self.effectiveDecay = pow(decay, Double(max(1, updateInterval)))
         self.gaussWidth = gaussWidth
         self.biasMeanBPM = biasMeanBPM
         self.biasWidth = biasWidth
@@ -45,7 +53,11 @@ final class TempoTracker {
         ring[ringHead] = value
         ringHead = (ringHead + 1) % ossLen
         if ringFilled < ossLen { ringFilled += 1; return }
-        update()
+        sinceUpdate += 1
+        if sinceUpdate >= updateInterval {
+            sinceUpdate = 0
+            update()
+        }
     }
 
     private func biasWeight(forLag lag: Int) -> Double {
@@ -76,7 +88,7 @@ final class TempoTracker {
         candidates.sort { $0.score > $1.score }
         let top = Array(candidates.prefix(numCandidates))
 
-        for i in 0..<histogram.count { histogram[i] *= decay }
+        for i in 0..<histogram.count { histogram[i] *= effectiveDecay }
         for c in top {
             let weight = Double(c.score) * biasWeight(forLag: c.lag)
             let lo = max(minLag, c.lag - Int(4 * gaussWidth))

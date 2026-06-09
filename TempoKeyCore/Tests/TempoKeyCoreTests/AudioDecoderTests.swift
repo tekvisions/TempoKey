@@ -17,4 +17,18 @@ final class AudioDecoderTests: XCTestCase {
         let decoded = try AudioDecoder().decode(url: url)
         XCTAssertEqual(decoded.sampleRate, 44100, accuracy: 1)  // upsampled to analysis rate
     }
+
+    func testNonAudioFileThrowsFriendlyError() throws {
+        let url = FileManager.default.temporaryDirectory
+            .appendingPathComponent("notaudio-\(UUID().uuidString).txt")
+        try "this is not audio".write(to: url, atomically: true, encoding: .utf8)
+        defer { try? FileManager.default.removeItem(at: url) }
+
+        XCTAssertThrowsError(try AudioDecoder().decode(url: url)) { error in
+            // The app surfaces error.localizedDescription; it must be human-friendly, not a raw OSStatus.
+            let message = error.localizedDescription
+            XCTAssertTrue(message.contains("Couldn't read"), "expected a friendly message, got: \(message)")
+            XCTAssertTrue(message.contains(url.lastPathComponent), "message should name the file")
+        }
+    }
 }
