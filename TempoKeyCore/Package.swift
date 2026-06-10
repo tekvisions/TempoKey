@@ -8,7 +8,15 @@ let package = Package(
         .library(name: "TempoKeyCore", targets: ["TempoKeyCore"]),
     ],
     targets: [
-        .target(name: "TempoKeyCore"),
+        .target(
+            name: "TempoKeyCore",
+            swiftSettings: [
+                // Always compile the DSP-heavy core with optimizations, even inside a Debug
+                // app build, so analysis stays fast (~40x vs -Onone) with identical behaviour.
+                // Permitted because this is a local path dependency, not a versioned one.
+                .unsafeFlags(["-O"]),
+            ]
+        ),
         .testTarget(name: "TempoKeyCoreTests", dependencies: ["TempoKeyCore"]),
     ]
 )

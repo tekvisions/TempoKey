@@ -46,11 +46,12 @@ schemes:
       targets:
         TempoKey: all
         TempoKeyAppTests: [test]
-    # Run uses the optimized Release build: the DSP analysis is ~40x faster
-    # compiled with -O (Debug/-Onone takes tens of seconds for the same result).
-    # Switch this back to Debug if you need to step-debug the app UI.
+    # Run uses Debug so the app launches under Xcode's debugger (Release is sandboxed
+    # and strips get-task-allow, which crashes sandbox init under the debugger). Speed is
+    # preserved because the TempoKeyCore package is compiled with -O regardless of config
+    # (see Package.swift), so the heavy analysis stays fast even in this Debug build.
     run:
-      config: Release
+      config: Debug
     test:
       config: Debug
       targets: [TempoKeyAppTests]
