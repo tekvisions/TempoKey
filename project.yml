@@ -46,7 +46,11 @@ schemes:
       targets:
         TempoKey: all
         TempoKeyAppTests: [test]
+    # Run uses the optimized Release build: the DSP analysis is ~40x faster
+    # compiled with -O (Debug/-Onone takes tens of seconds for the same result).
+    # Switch this back to Debug if you need to step-debug the app UI.
     run:
-      config: Debug
+      config: Release
     test:
+      config: Debug
       targets: [TempoKeyAppTests]
