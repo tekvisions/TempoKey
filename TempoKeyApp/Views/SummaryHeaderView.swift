@@ -7,7 +7,7 @@ struct SummaryHeaderView: View {
     var body: some View {
         HStack(alignment: .lastTextBaseline, spacing: 22) {
             VStack(alignment: .leading, spacing: 0) {
-                Text("\(Int(result.overallBPM.rounded()))")
+                Text(Theme.bpm(result.overallBPM))
                     .font(.system(size: 46, weight: .bold, design: .rounded)).monospacedDigit()
                 HStack(spacing: 6) {
                     Text("BPM").font(.caption2).tracking(2).foregroundStyle(Theme.accent)

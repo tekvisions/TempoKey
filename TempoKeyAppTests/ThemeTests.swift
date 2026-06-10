@@ -10,6 +10,12 @@ final class ThemeTests: XCTestCase {
         XCTAssertEqual(Theme.duration(222), "3:42")
     }
 
+    func testBPMFormattingToHundredths() {
+        XCTAssertEqual(Theme.bpm(130.834651), "130.83")
+        XCTAssertEqual(Theme.bpm(120), "120.00")
+        XCTAssertEqual(Theme.bpm(99.999), "100.00")
+    }
+
     func testKeyColorIsStableAndDistinguishesMode() {
         let cMaj = MusicalKey(tonic: .c, mode: .major)
         let cMin = MusicalKey(tonic: .c, mode: .minor)

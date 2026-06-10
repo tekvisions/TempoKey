@@ -8,6 +8,11 @@ enum Theme {
         return String(format: "%d:%02d", total / 60, total % 60)
     }
 
+    /// BPM to two decimal places (hundredths), e.g. "130.83".
+    static func bpm(_ value: Double) -> String {
+        String(format: "%.2f", value)
+    }
+
     struct KeyColor { let hue: Double; let saturation: Double; let brightness: Double }
 
     /// Circle-of-fifths hue; major brighter/less saturated, minor deeper.
