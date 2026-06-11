@@ -13,7 +13,7 @@ This documents how to package TempoKey so it opens cleanly on **other** people's
 | Runs across formats/lengths without crashing | ✅ verified |
 | **Code signing for distribution** | ❌ **ad-hoc only — must fix** |
 | **Notarization** | ❌ **required for download** |
-| App icon | ⚠️ none (generic icon) — optional polish |
+| App icon | ✅ yes (circle-of-fifths wheel + tempo pulse) |
 | Minimum macOS | 14.0 (won't run on 13 or earlier) |
 
 **The blocker:** the local build is *ad-hoc* signed (`Signature=adhoc`, `spctl` → `rejected`).

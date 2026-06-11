@@ -11,6 +11,7 @@
 		5083421A2FAA1F9B52120AD6 /* ThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C9929CF092B5B38E79CAC /* ThemeTests.swift */; };
 		63E2CCC37AD49601A6DA09FB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1210C4546A1BF8855264C228 /* AppState.swift */; };
 		6C3127CC1677DBCEA5DDC750 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8CD49989E60E437D5EA9C4 /* Theme.swift */; };
+		7F8251A6ECAE2AB4F72291E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37837CAE8B454B98093F38AE /* Assets.xcassets */; };
 		8EA614C4661DB1E85D228C19 /* TempoKeyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641F75875B3938F2B3AF847 /* TempoKeyApp.swift */; };
 		97849868AABEA7682371C433 /* KeyRibbonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F223E88045622112C832CF05 /* KeyRibbonView.swift */; };
 		AA63E95A636BE79504D51BE8 /* ImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49BDEF2B9E7551B1797DEE2 /* ImportView.swift */; };
@@ -35,6 +36,7 @@
 		1210C4546A1BF8855264C228 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		235E67D8E7D1FB1640935189 /* BeatTickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatTickView.swift; sourceTree = "<group>"; };
 		374F1A941C7039ED31918455 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
+		37837CAE8B454B98093F38AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49DB2DBD7A351D53E939D0FE /* TempoKey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TempoKey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58AF36E4441D5BEFEDB4528B /* SummaryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryHeaderView.swift; sourceTree = "<group>"; };
 		5A183C827F73352468B12D0D /* TempoKeyAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TempoKeyAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				1210C4546A1BF8855264C228 /* AppState.swift */,
+				37837CAE8B454B98093F38AE /* Assets.xcassets */,
 				DED76460098CF25605BDFCF4 /* Info.plist */,
 				BC6F06C0D6F87B278CE9BF94 /* TempoKey-Debug.entitlements */,
 				7AEBA273CE6F2454C533B2D1 /* TempoKey.entitlements */,
@@ -134,6 +137,7 @@
 			buildConfigurationList = FEC46E96DE619DC0AC9144A4 /* Build configuration list for PBXNativeTarget "TempoKey" */;
 			buildPhases = (
 				A2B5035CF5797B2EC2464039 /* Sources */,
+				E6057756104BD6F470D1213E /* Resources */,
 				847908646D5D2494703792BE /* Frameworks */,
 			);
 			buildRules = (
@@ -199,6 +203,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E6057756104BD6F470D1213E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F8251A6ECAE2AB4F72291E5 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5E9585081C0D429737B3BED8 /* Sources */ = {
