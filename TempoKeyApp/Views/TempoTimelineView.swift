@@ -1,57 +1,45 @@
 import SwiftUI
-import Charts
 import TempoKeyCore
 
+/// Tempo (BPM) line over the visible time window. Drawn with Canvas so it stays pixel-aligned
+/// with the key/beat tracks under zoom (Swift Charts' axis gutter would offset it).
 struct TempoTimelineView: View {
     let series: [TempoPoint]
-    let duration: Double
-    @State private var hover: TempoPoint?
-
-    private var yDomain: ClosedRange<Double> {
-        let bpms = series.map(\.bpm)
-        let lo = (bpms.min() ?? 60) - 8, hi = (bpms.max() ?? 160) + 8
-        return lo...max(hi, lo + 1)
-    }
+    let window: ClosedRange<Double>
 
     var body: some View {
-        Chart {
-            ForEach(series, id: \.time) { p in
-                LineMark(x: .value("Time", p.time), y: .value("BPM", p.bpm))
-                    .interpolationMethod(.monotone)
-                    .foregroundStyle(Theme.accent)
+        Canvas { ctx, size in
+            let lo = window.lowerBound
+            let hi = max(window.upperBound, lo + 0.0001)
+            let span = hi - lo
+            func x(_ t: Double) -> CGFloat { CGFloat((t - lo) / span) * size.width }
+
+            // y range from points in (or near) the window so zooming reveals detail
+            let visible = series.filter { $0.time >= lo - span * 0.1 && $0.time <= hi + span * 0.1 }
+            let bpms = (visible.isEmpty ? series.map(\.bpm) : visible.map(\.bpm))
+            let yMin = (bpms.min() ?? 60) - 4
+            let yMax = (bpms.max() ?? 160) + 4
+            let yspan = max(1, yMax - yMin)
+            func y(_ b: Double) -> CGFloat { size.height - CGFloat((b - yMin) / yspan) * size.height }
+
+            // gridlines + bpm labels
+            for b in [yMin, (yMin + yMax) / 2, yMax] {
+                let yy = y(b)
+                var line = Path(); line.move(to: CGPoint(x: 0, y: yy)); line.addLine(to: CGPoint(x: size.width, y: yy))
+                ctx.stroke(line, with: .color(.secondary.opacity(0.12)), lineWidth: 0.5)
+                ctx.draw(Text("\(Int(b.rounded()))").font(.system(size: 9)).foregroundStyle(.secondary),
+                         at: CGPoint(x: size.width - 3, y: yy), anchor: .trailing)
             }
-            if let hover {
-                RuleMark(x: .value("Time", hover.time)).foregroundStyle(.secondary.opacity(0.4))
-                PointMark(x: .value("Time", hover.time), y: .value("BPM", hover.bpm))
-                    .foregroundStyle(Theme.accent)
-                    .annotation(position: .top) {
-                        Text("\(Int(hover.bpm)) BPM").font(.caption2).monospacedDigit()
-                    }
+
+            // the line (draw a hair beyond the window so it doesn't clip mid-edge)
+            var path = Path()
+            var started = false
+            for p in series where p.time >= lo - span && p.time <= hi + span {
+                let pt = CGPoint(x: x(p.time), y: y(p.bpm))
+                if started { path.addLine(to: pt) } else { path.move(to: pt); started = true }
             }
-        }
-        .chartXScale(domain: 0...max(duration, 0.001))
-        .chartYScale(domain: yDomain)
-        .chartXAxis {
-            AxisMarks(values: .automatic(desiredCount: 6)) { v in
-                AxisValueLabel { if let t = v.as(Double.self) { Text(Theme.duration(t)) } }
-            }
-        }
-        .chartOverlay { proxy in
-            GeometryReader { geo in
-                Rectangle().fill(.clear).contentShape(Rectangle())
-                    .onContinuousHover { phase in
-                        switch phase {
-                        case .active(let pt):
-                            if let plot = proxy.plotFrame {
-                                let x = pt.x - geo[plot].origin.x
-                                if let t: Double = proxy.value(atX: x) {
-                                    hover = series.min(by: { abs($0.time - t) < abs($1.time - t) })
-                                }
-                            }
-                        case .ended: hover = nil
-                        }
-                    }
-            }
+            ctx.stroke(path, with: .color(Theme.accent),
+                       style: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))
         }
         .frame(height: 120)
     }

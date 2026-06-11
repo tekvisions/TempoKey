@@ -9,16 +9,8 @@ struct ReportView: View {
         VStack(alignment: .leading, spacing: 18) {
             SummaryHeaderView(result: result)
             Divider()
-            track("TEMPO", color: Theme.accent) {
-                TempoTimelineView(series: result.tempoSeries, duration: result.duration)
-            }
-            track("KEY", color: .secondary) {
-                KeyRibbonView(segments: result.keySeries, duration: result.duration)
-            }
-            track("BEATS", color: .secondary) {
-                BeatTickView(beats: result.beats, duration: result.duration)
-            }
-            Spacer()
+            TimelineSection(result: result)
+            Spacer(minLength: 0)
         }
         .padding(24)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -29,14 +21,6 @@ struct ReportView: View {
                 }.pickerStyle(.segmented).frame(width: 180)
                 Button { state.reset() } label: { Label("Open File", systemImage: "folder") }
             }
-        }
-    }
-
-    @ViewBuilder
-    private func track<Content: View>(_ label: String, color: Color, @ViewBuilder _ content: () -> Content) -> some View {
-        VStack(alignment: .leading, spacing: 5) {
-            Text(label).font(.caption2).tracking(1.5).foregroundStyle(color)
-            content()
         }
     }
 }
