@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20D50CB64011199045C60D1B /* TimelineSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D905668293F83C7F9873E9E /* TimelineSection.swift */; };
+		2DF79918215FCA1EB46959B1 /* TimelineZoomTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E35D4523B00AC5FF9EAADA9 /* TimelineZoomTests.swift */; };
+		36121A3C5EF68AF2571F6D6E /* TimelineInteractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032E02FA415F9AF00F5D4BF8 /* TimelineInteractionView.swift */; };
 		397700737C22192DA1B57576 /* TempoTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFB29BC8FD4BFDD4BDB5CC1 /* TempoTimelineView.swift */; };
 		5083421A2FAA1F9B52120AD6 /* ThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C9929CF092B5B38E79CAC /* ThemeTests.swift */; };
 		63E2CCC37AD49601A6DA09FB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1210C4546A1BF8855264C228 /* AppState.swift */; };
@@ -18,8 +21,10 @@
 		AF7678A2715A633E868FBDE6 /* AnalyzingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EAFEB945EF6DDE818BC75D /* AnalyzingView.swift */; };
 		B1FE74AB5AA9722CE292ED04 /* SummaryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AF36E4441D5BEFEDB4528B /* SummaryHeaderView.swift */; };
 		BCD91E8B86EF4B28E791511C /* BeatTickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235E67D8E7D1FB1640935189 /* BeatTickView.swift */; };
+		C0739ABEE8F6045FC07A3D4C /* KeyOverviewMinimap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1380F1244EAC1D8DAEA6422A /* KeyOverviewMinimap.swift */; };
 		C8764BAEC7DD118F1705140C /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F1A941C7039ED31918455 /* ReportView.swift */; };
 		CC1C7818A587C01C01864BAE /* TempoKeyCore in Frameworks */ = {isa = PBXBuildFile; productRef = C239E23EE73720E8007EFC55 /* TempoKeyCore */; };
+		EF9208702648CF515BFAAD1F /* TimelineZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9278FC3A9D26264B29F3A74 /* TimelineZoom.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,14 +38,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		032E02FA415F9AF00F5D4BF8 /* TimelineInteractionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineInteractionView.swift; sourceTree = "<group>"; };
 		1210C4546A1BF8855264C228 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		1380F1244EAC1D8DAEA6422A /* KeyOverviewMinimap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyOverviewMinimap.swift; sourceTree = "<group>"; };
 		235E67D8E7D1FB1640935189 /* BeatTickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatTickView.swift; sourceTree = "<group>"; };
+		2E35D4523B00AC5FF9EAADA9 /* TimelineZoomTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineZoomTests.swift; sourceTree = "<group>"; };
 		374F1A941C7039ED31918455 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		37837CAE8B454B98093F38AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49DB2DBD7A351D53E939D0FE /* TempoKey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TempoKey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58AF36E4441D5BEFEDB4528B /* SummaryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryHeaderView.swift; sourceTree = "<group>"; };
 		5A183C827F73352468B12D0D /* TempoKeyAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TempoKeyAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A6C9929CF092B5B38E79CAC /* ThemeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTests.swift; sourceTree = "<group>"; };
+		5D905668293F83C7F9873E9E /* TimelineSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineSection.swift; sourceTree = "<group>"; };
 		7AEBA273CE6F2454C533B2D1 /* TempoKey.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TempoKey.entitlements; sourceTree = "<group>"; };
 		92EAFEB945EF6DDE818BC75D /* AnalyzingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzingView.swift; sourceTree = "<group>"; };
 		9641F75875B3938F2B3AF847 /* TempoKeyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoKeyApp.swift; sourceTree = "<group>"; };
@@ -48,6 +57,7 @@
 		AD8CD49989E60E437D5EA9C4 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		BC6F06C0D6F87B278CE9BF94 /* TempoKey-Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TempoKey-Debug.entitlements"; sourceTree = "<group>"; };
 		C2D0D9F32B7CBEC924CF80D3 /* TempoKeyCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TempoKeyCore; path = TempoKeyCore; sourceTree = SOURCE_ROOT; };
+		C9278FC3A9D26264B29F3A74 /* TimelineZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineZoom.swift; sourceTree = "<group>"; };
 		DBFB29BC8FD4BFDD4BDB5CC1 /* TempoTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoTimelineView.swift; sourceTree = "<group>"; };
 		DED76460098CF25605BDFCF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F223E88045622112C832CF05 /* KeyRibbonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyRibbonView.swift; sourceTree = "<group>"; };
@@ -75,6 +85,7 @@
 				7AEBA273CE6F2454C533B2D1 /* TempoKey.entitlements */,
 				9641F75875B3938F2B3AF847 /* TempoKeyApp.swift */,
 				AD8CD49989E60E437D5EA9C4 /* Theme.swift */,
+				C9278FC3A9D26264B29F3A74 /* TimelineZoom.swift */,
 				84E1C4FC37204C4A4B9ED369 /* Views */,
 			);
 			path = TempoKeyApp;
@@ -95,10 +106,13 @@
 				92EAFEB945EF6DDE818BC75D /* AnalyzingView.swift */,
 				235E67D8E7D1FB1640935189 /* BeatTickView.swift */,
 				A49BDEF2B9E7551B1797DEE2 /* ImportView.swift */,
+				1380F1244EAC1D8DAEA6422A /* KeyOverviewMinimap.swift */,
 				F223E88045622112C832CF05 /* KeyRibbonView.swift */,
 				374F1A941C7039ED31918455 /* ReportView.swift */,
 				58AF36E4441D5BEFEDB4528B /* SummaryHeaderView.swift */,
 				DBFB29BC8FD4BFDD4BDB5CC1 /* TempoTimelineView.swift */,
+				032E02FA415F9AF00F5D4BF8 /* TimelineInteractionView.swift */,
+				5D905668293F83C7F9873E9E /* TimelineSection.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -107,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				5A6C9929CF092B5B38E79CAC /* ThemeTests.swift */,
+				2E35D4523B00AC5FF9EAADA9 /* TimelineZoomTests.swift */,
 			);
 			path = TempoKeyAppTests;
 			sourceTree = "<group>";
@@ -221,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5083421A2FAA1F9B52120AD6 /* ThemeTests.swift in Sources */,
+				2DF79918215FCA1EB46959B1 /* TimelineZoomTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,12 +248,16 @@
 				63E2CCC37AD49601A6DA09FB /* AppState.swift in Sources */,
 				BCD91E8B86EF4B28E791511C /* BeatTickView.swift in Sources */,
 				AA63E95A636BE79504D51BE8 /* ImportView.swift in Sources */,
+				C0739ABEE8F6045FC07A3D4C /* KeyOverviewMinimap.swift in Sources */,
 				97849868AABEA7682371C433 /* KeyRibbonView.swift in Sources */,
 				C8764BAEC7DD118F1705140C /* ReportView.swift in Sources */,
 				B1FE74AB5AA9722CE292ED04 /* SummaryHeaderView.swift in Sources */,
 				8EA614C4661DB1E85D228C19 /* TempoKeyApp.swift in Sources */,
 				397700737C22192DA1B57576 /* TempoTimelineView.swift in Sources */,
 				6C3127CC1677DBCEA5DDC750 /* Theme.swift in Sources */,
+				36121A3C5EF68AF2571F6D6E /* TimelineInteractionView.swift in Sources */,
+				20D50CB64011199045C60D1B /* TimelineSection.swift in Sources */,
+				EF9208702648CF515BFAAD1F /* TimelineZoom.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
