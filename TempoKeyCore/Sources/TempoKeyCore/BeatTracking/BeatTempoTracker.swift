@@ -28,22 +28,51 @@ final class BeatTempoTracker {
 
     func process(_ samples: [Float]) -> BeatTempoOutput {
         let oss = onset.process(samples)
-        var series: [(Double, Double)] = []
+        var times: [Double] = []
+        var rawBPM: [Double] = []
         for (i, v) in oss.enumerated() {
             tempo.push(v)
             let bpm = tempo.currentBPM
             let T = bpm > 0 ? 60.0 * ossRate / bpm : 0
             beat.push(v, beatPeriod: T)
             if i % tempoSamplePeriod == 0 && bpm > 0 {
-                series.append((Double(i) / ossRate, bpm))
+                times.append(Double(i) / ossRate)
+                rawBPM.append(bpm)
             }
         }
-        let overall = tempo.currentBPM
+
+        // Edge-preserving median smoothing of the displayed tempo: removes isolated frame-to-frame
+        // flips (and ambiguous intro/outro/transition spikes) while keeping genuine tempo steps.
+        let smoothBPM = Self.medianFilter(rawBPM, radius: 4)
+        let series = zip(times, smoothBPM).map { (time: $0.0, bpm: $0.1) }
+
+        // Overall = median of the smoothed series (robust to intro/outro/transition outliers).
+        // The decaying histogram's end-of-song peak is not representative for tempo-changing songs.
+        let overall = Self.median(smoothBPM) ?? tempo.currentBPM
         let T = overall > 0 ? 60.0 * ossRate / overall : 0
         let beats = beat.beatIndices(beatPeriod: T).map { Double($0) / ossRate }
+
         return BeatTempoOutput(overallBPM: overall,
                                bpmConfidence: tempo.certainty,
                                tempoSeries: series,
                                beats: beats)
+    }
+
+    static func median(_ a: [Double]) -> Double? {
+        guard !a.isEmpty else { return nil }
+        let s = a.sorted()
+        let n = s.count
+        return n.isMultiple(of: 2) ? (s[n / 2 - 1] + s[n / 2]) / 2 : s[n / 2]
+    }
+
+    /// Sliding-window median (window = 2*radius+1). Edge-preserving; clamps window at the ends.
+    static func medianFilter(_ a: [Double], radius r: Int) -> [Double] {
+        guard r > 0, a.count > 2 * r else { return a }
+        var out = a
+        for i in a.indices {
+            let lo = max(0, i - r), hi = min(a.count - 1, i + r)
+            out[i] = median(Array(a[lo...hi])) ?? a[i]
+        }
+        return out
     }
 }
