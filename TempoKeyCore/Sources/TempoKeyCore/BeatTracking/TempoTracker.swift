@@ -71,11 +71,17 @@ final class TempoTracker {
         var win = [Float](repeating: 0, count: ossLen)
         for i in 0..<ossLen { win[i] = ring[(ringHead + i) % ossLen] }
 
-        var ac = fft.generalizedAutocorrelation(win, exponent: exponent)
+        let raw = fft.generalizedAutocorrelation(win, exponent: exponent)
+        var ac = raw
+        // Harmonic comb: reinforce a candidate fundamental with its real harmonics (2x,3x,4x lag).
+        // Including the 3x term is important: without it a lag at 1.5*T (a 3:2 sub-tempo) picks up
+        // the strong 3*T autocorrelation peak at its 2x position and competes with the true tempo,
+        // causing the reading to flip between T and (2/3)T.
         for i in minLag...maxLag {
-            var v = ac[i]
-            if 2 * i < ossLen { v += ac[2 * i] }
-            if 4 * i < ossLen { v += ac[4 * i] }
+            var v = raw[i]
+            if 2 * i < ossLen { v += raw[2 * i] }
+            if 3 * i < ossLen { v += raw[3 * i] }
+            if 4 * i < ossLen { v += raw[4 * i] }
             ac[i] = v
         }
         var candidates: [(lag: Int, score: Float)] = []
@@ -103,7 +109,19 @@ final class TempoTracker {
     var currentBPM: Double {
         guard let best = histogram.enumerated().max(by: { $0.element < $1.element }),
               best.element > 0, best.offset > 0 else { return 0 }
-        return 60.0 * ossRate / Double(best.offset)
+        // Parabolic sub-bin interpolation around the peak: integer lags quantize BPM (~1 BPM steps
+        // near 130-140), which shows up as stair-stepping. Refine to a continuous lag.
+        let i = best.offset
+        var lag = Double(i)
+        if i > 0, i < histogram.count - 1 {
+            let a = histogram[i - 1], b = histogram[i], c = histogram[i + 1]
+            let denom = a - 2 * b + c
+            if denom != 0 {
+                let delta = 0.5 * (a - c) / denom
+                if delta > -1, delta < 1 { lag = Double(i) + delta }
+            }
+        }
+        return 60.0 * ossRate / lag
     }
 
     var certainty: Double {
