@@ -9,6 +9,4 @@ xcuserdata/
 *.xcscmblueprint
 .swiftpm/
 dist/
-docs/
-scripts/
-.github
+
