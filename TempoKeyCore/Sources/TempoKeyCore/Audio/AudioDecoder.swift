@@ -8,12 +8,15 @@ struct DecodedAudio {
 
 enum AudioDecoderError: LocalizedError {
     case unreadableFile(String)
+    case tooLong(String)
     case cannotCreateConverter, cannotCreateBuffer, readFailed
 
     var errorDescription: String? {
         switch self {
         case .unreadableFile(let name):
             return "Couldn't read “\(name)”. It may not be a supported audio file."
+        case .tooLong(let name):
+            return "“\(name)” is too long to analyze. Please try a shorter file."
         case .cannotCreateConverter, .cannotCreateBuffer, .readFailed:
             return "Couldn't process this audio file. It may be corrupted or in an unsupported format."
         }
@@ -23,7 +26,12 @@ enum AudioDecoderError: LocalizedError {
 /// Decodes any AVFoundation-readable file to mono Float32 at a fixed analysis rate.
 final class AudioDecoder {
     let analysisRate: Double
-    init(analysisRate: Double = 44100) { self.analysisRate = analysisRate }
+    let maxDuration: Double   // seconds; caps memory use and rejects length-spoofed files
+
+    init(analysisRate: Double = 44100, maxDuration: Double = 3600) {
+        self.analysisRate = analysisRate
+        self.maxDuration = maxDuration
+    }
 
     func decode(url: URL) throws -> DecodedAudio {
         let file: AVAudioFile
@@ -33,6 +41,15 @@ final class AudioDecoder {
             throw AudioDecoderError.unreadableFile(url.lastPathComponent)
         }
         let inFormat = file.processingFormat
+
+        // Reject absurdly long files up front so a huge (or length-spoofed) file can't
+        // exhaust memory by decoding into an unbounded buffer.
+        if inFormat.sampleRate > 0,
+           Double(file.length) / inFormat.sampleRate > maxDuration {
+            throw AudioDecoderError.tooLong(url.lastPathComponent)
+        }
+        let maxSamples = Int(maxDuration * analysisRate)
+
         let outFormat = AVAudioFormat(commonFormat: .pcmFormatFloat32,
                                       sampleRate: analysisRate,
                                       channels: 1, interleaved: false)!
@@ -69,6 +86,10 @@ final class AudioDecoder {
             if error != nil || status == .error { throw AudioDecoderError.readFailed }
             if let ch = outBuf.floatChannelData, outBuf.frameLength > 0 {
                 output.append(contentsOf: UnsafeBufferPointer(start: ch[0], count: Int(outBuf.frameLength)))
+            }
+            // Defensive cap in case the header under-reported length.
+            if output.count > maxSamples {
+                throw AudioDecoderError.tooLong(url.lastPathComponent)
             }
         }
 

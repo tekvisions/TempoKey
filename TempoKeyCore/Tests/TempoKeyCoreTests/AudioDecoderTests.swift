@@ -31,4 +31,16 @@ final class AudioDecoderTests: XCTestCase {
             XCTAssertTrue(message.contains(url.lastPathComponent), "message should name the file")
         }
     }
+
+    func testRejectsFileLongerThanMaxDuration() throws {
+        let url = try TestSignals.writeWAV(TestSignals.tones([440], seconds: 2), sampleRate: 44100)
+        defer { try? FileManager.default.removeItem(at: url) }
+        // A 2 s file exceeds a 0.5 s cap → rejected with a friendly "too long" message (no OOM).
+        XCTAssertThrowsError(try AudioDecoder(maxDuration: 0.5).decode(url: url)) { error in
+            XCTAssertTrue(error.localizedDescription.contains("too long"),
+                          "expected too-long message, got: \(error.localizedDescription)")
+        }
+        // Same file decodes fine under the default cap.
+        XCTAssertNoThrow(try AudioDecoder().decode(url: url))
+    }
 }
