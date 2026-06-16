@@ -14,6 +14,7 @@ final class AppState: ObservableObject {
     @Published var progress: Double = 0
     @Published var result: AnalysisResult?
     @Published var appearance: Appearance = .light    // "paper" default
+    @Published var availableUpdate: AppUpdate?        // set when a newer GitHub release exists
 
     var colorScheme: ColorScheme? {
         switch appearance {
@@ -46,4 +47,13 @@ final class AppState: ObservableObject {
     }
 
     func reset() { phase = .idle; result = nil; progress = 0 }
+
+    /// Checks GitHub for a newer release and surfaces a banner if one exists. Silent on failure;
+    /// skipped under XCTest so the test runner never makes a network call.
+    func checkForUpdates() async {
+        if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil { return }
+        guard let update = await UpdateCheck.latest(),
+              UpdateCheck.isNewer(update.version, than: UpdateCheck.currentVersion()) else { return }
+        availableUpdate = update
+    }
 }
