@@ -3,6 +3,11 @@ options:
   bundleIdPrefix: com.tempokey
   deploymentTarget:
     macOS: "14.0"
+# Project-wide so the app and its test bundle sign with the same Team ID (a mismatch
+# stops the hosted XCTest bundle from loading into the app host).
+settings:
+  base:
+    DEVELOPMENT_TEAM: 72G9XN68CV
 packages:
   TempoKeyCore:
     path: TempoKeyCore
@@ -16,7 +21,6 @@ targets:
         product: TempoKeyCore
     settings:
       base:
-        DEVELOPMENT_TEAM: 72G9XN68CV
         PRODUCT_BUNDLE_IDENTIFIER: com.tempokey.app
         INFOPLIST_FILE: TempoKeyApp/Info.plist
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
