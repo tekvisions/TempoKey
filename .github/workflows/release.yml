@@ -12,7 +12,28 @@ permissions:
   contents: write
 
 jobs:
+  # Gate: GitHub doesn't allow `secrets` in a job-level `if`, so a tiny job exposes
+  # "are signing secrets configured?" as an output. Without them, `release` is skipped
+  # (neutral) instead of failing red.
+  check-secrets:
+    runs-on: ubuntu-latest
+    outputs:
+      ready: ${{ steps.check.outputs.ready }}
+    steps:
+      - id: check
+        env:
+          DEVELOPER_ID_NAME: ${{ secrets.DEVELOPER_ID_NAME }}
+        run: |
+          if [ -n "$DEVELOPER_ID_NAME" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Signing secrets not configured — skipping the release build. See docs/RELEASING-GITHUB.md."
+          fi
+
   release:
+    needs: check-secrets
+    if: needs.check-secrets.outputs.ready == 'true'
     runs-on: macos-14
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
