@@ -19,6 +19,7 @@
 		63E2CCC37AD49601A6DA09FB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1210C4546A1BF8855264C228 /* AppState.swift */; };
 		6C3127CC1677DBCEA5DDC750 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8CD49989E60E437D5EA9C4 /* Theme.swift */; };
 		794AF59ECCD28ABD7021B6BD /* UpdateCheckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB990CE8F89EDB46E5AE7E7 /* UpdateCheckTests.swift */; };
+		7CA15A482A69E3DB386C5740 /* CorrectionsBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D26A0ACA45662B4D2CF0748 /* CorrectionsBar.swift */; };
 		7F8251A6ECAE2AB4F72291E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37837CAE8B454B98093F38AE /* Assets.xcassets */; };
 		8EA614C4661DB1E85D228C19 /* TempoKeyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641F75875B3938F2B3AF847 /* TempoKeyApp.swift */; };
 		90A4C15FCE26A0005B615ABE /* UpdateCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4081FE919D030E48713162F6 /* UpdateCheck.swift */; };
@@ -55,6 +56,7 @@
 		2E35D4523B00AC5FF9EAADA9 /* TimelineZoomTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineZoomTests.swift; sourceTree = "<group>"; };
 		374F1A941C7039ED31918455 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		37837CAE8B454B98093F38AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3D26A0ACA45662B4D2CF0748 /* CorrectionsBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectionsBar.swift; sourceTree = "<group>"; };
 		4081FE919D030E48713162F6 /* UpdateCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCheck.swift; sourceTree = "<group>"; };
 		4329D5D2D9245C4367E7EFEC /* TapTempo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTempo.swift; sourceTree = "<group>"; };
 		49DB2DBD7A351D53E939D0FE /* TempoKey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TempoKey.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +129,7 @@
 			children = (
 				92EAFEB945EF6DDE818BC75D /* AnalyzingView.swift */,
 				235E67D8E7D1FB1640935189 /* BeatTickView.swift */,
+				3D26A0ACA45662B4D2CF0748 /* CorrectionsBar.swift */,
 				A49BDEF2B9E7551B1797DEE2 /* ImportView.swift */,
 				1380F1244EAC1D8DAEA6422A /* KeyOverviewMinimap.swift */,
 				F223E88045622112C832CF05 /* KeyRibbonView.swift */,
@@ -285,6 +288,7 @@
 				63E2CCC37AD49601A6DA09FB /* AppState.swift in Sources */,
 				BCD91E8B86EF4B28E791511C /* BeatTickView.swift in Sources */,
 				1D69582C20E37AC1703DECF7 /* Clipboard.swift in Sources */,
+				7CA15A482A69E3DB386C5740 /* CorrectionsBar.swift in Sources */,
 				A7BF045DA08DDB9B664109CA /* DisplayOverrides.swift in Sources */,
 				AA63E95A636BE79504D51BE8 /* ImportView.swift in Sources */,
 				C0739ABEE8F6045FC07A3D4C /* KeyOverviewMinimap.swift in Sources */,
@@ -377,14 +381,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TempoKeyApp/TempoKey.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = TempoKeyApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tempokey.app;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.9;
@@ -495,14 +499,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "TempoKeyApp/TempoKey-Debug.entitlements";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = TempoKeyApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.1;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tempokey.app;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.9;

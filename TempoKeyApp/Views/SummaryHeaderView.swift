@@ -2,28 +2,38 @@ import SwiftUI
 import TempoKeyCore
 
 struct SummaryHeaderView: View {
+    @EnvironmentObject var state: AppState
     let result: AnalysisResult
+
+    private var bpm: Double { state.displayedBPM() ?? result.overallBPM }
+    private var key: MusicalKey { state.displayedKey() ?? result.overallKey }
 
     var body: some View {
         HStack(alignment: .lastTextBaseline, spacing: 22) {
             VStack(alignment: .leading, spacing: 0) {
-                Text(Theme.bpm(result.overallBPM))
+                Text(Theme.bpm(bpm))
                     .font(.system(size: 46, weight: .bold, design: .rounded)).monospacedDigit()
                 HStack(spacing: 6) {
                     Text("BPM").font(.caption2).tracking(2).foregroundStyle(Theme.accent)
-                    // tempo confidence surfaced subtly, not hidden
                     Text("· \(Int((result.bpmConfidence * 100).rounded()))% conf")
                         .font(.caption2).foregroundStyle(.secondary)
                 }
             }
             VStack(alignment: .leading, spacing: 2) {
-                Text(result.overallKey.name).font(.system(size: 24, weight: .semibold))
-                Text("KEY").font(.caption2).tracking(2).foregroundStyle(.secondary)
+                Text("\(key.name)  ·  \(key.camelot)").font(.system(size: 24, weight: .semibold))
+                Text("KEY · mixes with \(key.compatibleCamelot.joined(separator: " "))")
+                    .font(.caption2).foregroundStyle(.secondary)
             }
             Spacer()
-            HStack(spacing: 22) {
-                labeled(result.fileName, "FILE")
-                labeled(Theme.duration(result.duration), "LENGTH")
+            VStack(alignment: .trailing, spacing: 6) {
+                Button {
+                    Clipboard.copy(Clipboard.summary(bpm: bpm, key: key))
+                } label: { Label("Copy", systemImage: "doc.on.doc") }
+                    .controlSize(.small)
+                HStack(spacing: 22) {
+                    labeled(result.fileName, "FILE")
+                    labeled(Theme.duration(result.duration), "LENGTH")
+                }
             }
         }
     }

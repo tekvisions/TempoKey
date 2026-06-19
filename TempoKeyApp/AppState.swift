@@ -15,6 +15,8 @@ final class AppState: ObservableObject {
     @Published var result: AnalysisResult?
     @Published var appearance: Appearance = .light    // "paper" default
     @Published var availableUpdate: AppUpdate?        // set when a newer GitHub release exists
+    @Published var overrides = DisplayOverrides()     // user BPM/key corrections (display only)
+    private var tapTempo = TapTempo()
 
     var colorScheme: ColorScheme? {
         switch appearance {
@@ -28,7 +30,7 @@ final class AppState: ObservableObject {
     /// for `url` and releases it once analysis finishes (success or failure),
     /// so AVFoundation can finish reading the file even for long tracks.
     func analyze(url: URL, securityScoped: Bool = false) {
-        phase = .analyzing; progress = 0; result = nil
+        phase = .analyzing; progress = 0; result = nil; overrides.clear()
         Task.detached(priority: .userInitiated) { [weak self] in
             defer { if securityScoped { url.stopAccessingSecurityScopedResource() } }
             do {
@@ -46,7 +48,19 @@ final class AppState: ObservableObject {
         }
     }
 
-    func reset() { phase = .idle; result = nil; progress = 0 }
+    func reset() { phase = .idle; result = nil; progress = 0; overrides.clear() }
+
+    /// Displayed BPM/key apply the user's corrections on top of the detected values.
+    func displayedBPM() -> Double? { result.map { overrides.displayedBPM(detected: $0.overallBPM) } }
+    func displayedKey() -> MusicalKey? { result.map { overrides.displayedKey(detected: $0.overallKey) } }
+
+    /// Record a tap; once enough taps land, set the manual BPM and clear any ½/×2 multiplier.
+    func registerTap() {
+        if let bpm = tapTempo.tap(at: ProcessInfo.processInfo.systemUptime) {
+            overrides.manualBPM = bpm
+            overrides.bpmMultiplier = 1
+        }
+    }
 
     /// Checks GitHub for a newer release and surfaces a banner if one exists. Silent on failure;
     /// skipped under XCTest so the test runner never makes a network call.

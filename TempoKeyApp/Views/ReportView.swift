@@ -8,6 +8,7 @@ struct ReportView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
             SummaryHeaderView(result: result)
+            CorrectionsBar()
             Divider()
             TimelineSection(result: result)
             Spacer(minLength: 0)
