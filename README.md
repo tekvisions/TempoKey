@@ -4,7 +4,7 @@ Minimalist, fully client-side **BPM & musical-key detection** for audio files, o
 
 Load a track → TempoKey analyzes the whole song offline and shows the overall tempo and key
 plus how each varies across the song on a shared timeline. Nothing is uploaded; all analysis
-runs on your machine.
+runs on your machine, fully private.
 
 ## Build & Run (macOS, Xcode)
 
