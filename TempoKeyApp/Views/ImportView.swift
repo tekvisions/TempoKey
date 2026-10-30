@@ -4,57 +4,54 @@ import UniformTypeIdentifiers
 struct ImportView: View {
     @EnvironmentObject var state: AppState
     let errorMessage: String?
-    @State private var isTargeted = false
-    @State private var showImporter = false
-
     var body: some View {
-        VStack(spacing: 18) {
+        VStack(spacing: 24) {
             Spacer()
-            Text("TempoKey").font(.system(size: 26, weight: .semibold, design: .default))
-            Text("BPM & key detection for your music").foregroundStyle(.secondary)
-
-            RoundedRectangle(cornerRadius: 14)
-                .strokeBorder(style: StrokeStyle(lineWidth: 1.5, dash: [7, 5]))
-                .foregroundStyle(isTargeted ? Theme.accent : Color.secondary.opacity(0.5))
-                .background(RoundedRectangle(cornerRadius: 14).fill(Color.secondary.opacity(isTargeted ? 0.08 : 0.03)))
-                .overlay {
-                    VStack(spacing: 8) {
-                        Image(systemName: "waveform").font(.system(size: 34, weight: .light))
-                        Text("Drop an audio file").font(.headline)
-                        Text("or").foregroundStyle(.secondary).font(.caption)
-                        Button("Choose File…") { showImporter = true }
-                    }
-                }
-                .frame(width: 360, height: 200)
-                .onDrop(of: [.fileURL], isTargeted: $isTargeted) { providers in
-                    handleDrop(providers)
-                }
-
-            if let errorMessage {
-                Text(errorMessage).foregroundStyle(.red).font(.callout).multilineTextAlignment(.center)
-                    .frame(maxWidth: 360)
+            Image(systemName: "waveform.path").font(.system(size: 64, weight: .ultraLight)).foregroundStyle(Theme.accent)
+                .accessibilityHidden(true)
+            VStack(spacing: 8) {
+                Text("Know your music.").font(.system(size: 36, weight: .semibold, design: .rounded))
+                    .shadow(color: .black.opacity(0.06), radius: 1, y: 1)
+                Text("Tempo, key, and the shape of every track.").font(.title3).foregroundStyle(.secondary)
             }
+            VStack(spacing: 16) {
+                Text("Drop audio files or a folder anywhere").font(.headline)
+                Button("Import audio…", systemImage: "plus") { ImportPanel.open(state: state) }
+                    .buttonStyle(.borderedProminent).controlSize(.large)
+                Text("MP3, M4A, WAV, AIFF, CAF, FLAC").font(.caption).foregroundStyle(.secondary)
+            }.padding(30).frame(width: 380).background(.regularMaterial, in: RoundedRectangle(cornerRadius: 20))
+                .overlay(RoundedRectangle(cornerRadius: 20).strokeBorder(.primary.opacity(0.08)))
+            HStack(spacing: 28) {
+                Label("Entirely offline", systemImage: "lock.shield")
+                Label("Batch analysis", systemImage: "square.stack")
+                Label("Listen and refine", systemImage: "headphones")
+            }.font(.callout).foregroundStyle(.secondary)
+            if let errorMessage { Text(errorMessage).foregroundStyle(.red).frame(maxWidth: 500) }
+            RecentImportsView(recents: state.recents) { state.openRecent($0) }
             Spacer()
-        }
-        .padding(40)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .fileImporter(isPresented: $showImporter, allowedContentTypes: [.audio]) { result in
-            if case .success(let url) = result { startAnalysis(url) }
+        }.padding(32).frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+private struct RecentImportsView: View {
+    @ObservedObject var recents: RecentFiles
+    let open: (RecentImport) -> Void
+    var body: some View {
+        if !recents.items.isEmpty {
+            HStack {
+                Menu("Open recent") { ForEach(recents.items) { item in Button(item.name) { open(item) } } }
+                Button("Clear recents") { recents.clear() }.buttonStyle(.plain).foregroundStyle(.secondary)
+            }.frame(width: 360).font(.callout)
         }
     }
+}
 
-    private func startAnalysis(_ url: URL) {
-        // Hold the security scope until analysis finishes reading the file;
-        // AppState releases it when the background task completes.
-        let scoped = url.startAccessingSecurityScopedResource()
-        state.analyze(url: url, securityScoped: scoped)
-    }
-
-    private func handleDrop(_ providers: [NSItemProvider]) -> Bool {
-        guard let provider = providers.first else { return false }
-        _ = provider.loadObject(ofClass: URL.self) { url, _ in
-            if let url { DispatchQueue.main.async { startAnalysis(url) } }
-        }
-        return true
+@MainActor
+enum ImportPanel {
+    static func open(state: AppState) {
+        let panel = NSOpenPanel()
+        panel.canChooseFiles = true; panel.canChooseDirectories = true; panel.allowsMultipleSelection = true
+        panel.prompt = "Analyze"; panel.message = "Choose audio files or folders to analyze offline."
+        if panel.runModal() == .OK { state.importFiles(panel.urls) }
     }
 }

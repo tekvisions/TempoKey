@@ -4,9 +4,19 @@ import TempoKeyCore
 /// Quick manual corrections: tap-tempo, ½ / ×2 BPM, key override, reset.
 struct CorrectionsBar: View {
     @EnvironmentObject var state: AppState
+    @State private var manualTempo = ""
 
     var body: some View {
         HStack(spacing: 8) {
+            TextField("Set BPM", text: $manualTempo)
+                .textFieldStyle(.roundedBorder).frame(width: 76)
+                .accessibilityLabel("Manual BPM, press Return to apply")
+                .onSubmit {
+                    if let value = Double(manualTempo), value.isFinite, (20...400).contains(value) {
+                        state.overrides.manualBPM = value; state.overrides.bpmMultiplier = 1
+                        manualTempo = ""
+                    } else { state.notice = "Enter a BPM between 20 and 400." }
+                }
             Button("Tap") { state.registerTap() }.help("Tap to the beat to set BPM")
             Button("½") {
                 state.overrides.bpmMultiplier = state.overrides.bpmMultiplier == 0.5 ? 1 : 0.5

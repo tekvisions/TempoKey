@@ -17,7 +17,7 @@ final class TempoTracker {
     private var ringFilled = 0
     private var ringHead = 0
     private var sinceUpdate = 0
-    private let fft: RealFFT
+    private let fft: RealTransform
     private var histogram: [Double]         // indexed by lag
 
     /// `updateInterval`: the autocorrelation/histogram update is the expensive step (a full
@@ -32,7 +32,7 @@ final class TempoTracker {
          gaussWidth: Double = 5,
          biasMeanBPM: Double = 120, biasWidth: Double = 75,
          numCandidates: Int = 10,
-         updateInterval: Int = 8) {
+         updateInterval: Int = 8, fft: RealTransform? = nil) {
         self.ossRate = ossRate
         self.ossLen = ossLen
         self.minLag = Int((60.0 * ossRate / maxTempo).rounded(.down))
@@ -45,7 +45,7 @@ final class TempoTracker {
         self.biasWidth = biasWidth
         self.numCandidates = numCandidates
         self.ring = [Float](repeating: 0, count: ossLen)
-        self.fft = RealFFT(size: ossLen)
+        self.fft = fft ?? RealFFT(size: ossLen)
         self.histogram = [Double](repeating: 0, count: ossLen)
     }
 

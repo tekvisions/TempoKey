@@ -1,15 +1,15 @@
 import Foundation
 
-public enum PitchClass: Int, CaseIterable {
+public enum PitchClass: Int, CaseIterable, Codable, Sendable {
     case c = 0, cSharp, d, dSharp, e, f, fSharp, g, gSharp, a, aSharp, b
     public var name: String {
         ["C","C♯","D","D♯","E","F","F♯","G","G♯","A","A♯","B"][rawValue]
     }
 }
 
-public enum Mode: String { case major, minor }
+public enum Mode: String, Codable, Sendable { case major, minor }
 
-public struct MusicalKey: Equatable {
+public struct MusicalKey: Equatable, Codable, Sendable {
     public let tonic: PitchClass
     public let mode: Mode
     public init(tonic: PitchClass, mode: Mode) { self.tonic = tonic; self.mode = mode }
@@ -28,6 +28,13 @@ public struct MusicalKey: Equatable {
         let minor = [5, 12, 7, 2, 9, 4, 11, 6, 1, 8, 3, 10]
         let n = (mode == .major ? major : minor)[tonic.rawValue]
         return "\(n)\(mode == .major ? "B" : "A")"
+    }
+
+    /// Open Key wheel: 1d = C major, 1m = A minor.
+    public var openKey: String {
+        let major = [1, 8, 3, 10, 5, 12, 7, 2, 9, 4, 11, 6]
+        let minor = [10, 5, 12, 7, 2, 9, 4, 11, 6, 1, 8, 3]
+        return "\((mode == .major ? major : minor)[tonic.rawValue])\(mode == .major ? "d" : "m")"
     }
 
     /// The three harmonically-compatible Camelot codes: ±1 on the same ring, plus the relative

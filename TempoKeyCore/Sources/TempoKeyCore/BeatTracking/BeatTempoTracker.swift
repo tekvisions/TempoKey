@@ -27,10 +27,15 @@ final class BeatTempoTracker {
     }
 
     func process(_ samples: [Float]) -> BeatTempoOutput {
-        let oss = onset.process(samples)
+        process(samples, checkCancellation: {})
+    }
+
+    func process(_ samples: [Float], checkCancellation: () throws -> Void) rethrows -> BeatTempoOutput {
+        let oss = try onset.process(samples, checkCancellation: checkCancellation)
         var times: [Double] = []
         var rawBPM: [Double] = []
         for (i, v) in oss.enumerated() {
+            if i.isMultiple(of: 64) { try checkCancellation() }
             tempo.push(v)
             let bpm = tempo.currentBPM
             let T = bpm > 0 ? 60.0 * ossRate / bpm : 0

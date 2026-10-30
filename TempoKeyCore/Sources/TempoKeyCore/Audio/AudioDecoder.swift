@@ -24,7 +24,11 @@ enum AudioDecoderError: LocalizedError {
 }
 
 /// Decodes any AVFoundation-readable file to mono Float32 at a fixed analysis rate.
-final class AudioDecoder {
+protocol AudioDecoding {
+    func decode(url: URL) throws -> DecodedAudio
+}
+
+final class AudioDecoder: AudioDecoding {
     let analysisRate: Double
     let maxDuration: Double   // seconds; caps memory use and rejects length-spoofed files
 
@@ -34,6 +38,7 @@ final class AudioDecoder {
     }
 
     func decode(url: URL) throws -> DecodedAudio {
+        try Task.checkCancellation()
         let file: AVAudioFile
         do {
             file = try AVAudioFile(forReading: url)
@@ -67,6 +72,7 @@ final class AudioDecoder {
         // when called past EOF rather than returning 0 frames, so we guard against that by
         // checking framePosition before each read.
         while file.framePosition < file.length {
+            try Task.checkCancellation()
             try file.read(into: inBuf)
             if inBuf.frameLength == 0 { break }
 

@@ -16,4 +16,12 @@ final class TapTempoTests: XCTestCase {
         _ = t.tap(at: 0.0); _ = t.tap(at: 0.5)
         XCTAssertNil(t.tap(at: 10.0))         // >2s gap restarts; single tap → nil
     }
+    func testRecentTapsAdaptToNewTempo() {
+        var tap = TapTempo()
+        for i in 0..<100 { _ = tap.tap(at: Double(i) * 0.5) }
+        var value: Double?
+        for i in 1...8 { value = tap.tap(at: 49.5 + Double(i) * 0.4) }
+        XCTAssertEqual(value ?? 0, 150, accuracy: 0.1)
+    }
+
 }

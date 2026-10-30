@@ -5,6 +5,7 @@ import TempoKeyCore
 /// hover crosshair, zoom controls, and a full-song minimap for navigation.
 struct TimelineSection: View {
     let result: AnalysisResult
+    @ObservedObject var playback: PlaybackController
 
     @State private var window: ClosedRange<Double> = 0...1
     @State private var hoverFraction: Double?
@@ -30,6 +31,8 @@ struct TimelineSection: View {
                 .font(.caption2).monospacedDigit().foregroundStyle(.secondary)
             if isZoomed { Text("· zoomed").font(.caption2).foregroundStyle(Theme.accent) }
             Spacer()
+            Button { playback.loopRange = TransportBounds.loop(window, duration: total); playback.seek(window.lowerBound) } label: { Label("Loop region", systemImage: "repeat") }
+                .disabled(!playback.available).help("Loop the visible timeline range")
             Button { zoom(1 / 1.6) } label: { Image(systemName: "minus.magnifyingglass") }
                 .help("Zoom out")
             Button { window = 0...total } label: { Text("Reset") }
@@ -45,10 +48,20 @@ struct TimelineSection: View {
             labeled("TEMPO", Theme.accent) { TempoTimelineView(series: result.tempoSeries, window: window) }
             labeled("KEY", .secondary) { KeyRibbonView(segments: result.keySeries, window: window) }
             labeled("BEATS", .secondary) { BeatTickView(beats: result.beats, window: window) }
+            if !result.energySeries.isEmpty {
+                labeled("ENERGY", .secondary) { EnergyTimelineView(series: result.energySeries, window: window) }
+            }
+            if !result.downbeats.isEmpty {
+                labeled("ESTIMATED DOWNBEATS", .secondary) { BeatTickView(beats: result.downbeats, window: window) }
+            }
         }
         .overlay {
             GeometryReader { geo in
                 ZStack(alignment: .topLeading) {
+                    if window.contains(playback.time) {
+                        let x = CGFloat((playback.time - window.lowerBound) / max(0.001, window.upperBound - window.lowerBound)) * geo.size.width
+                        Rectangle().fill(Theme.accent).frame(width: 2, height: geo.size.height).offset(x: x).allowsHitTesting(false)
+                    }
                     if let f = hoverFraction { crosshair(f, geo.size) }
                     TimelineInteractionView(
                         onZoom: { factor, anchor in
@@ -56,7 +69,8 @@ struct TimelineSection: View {
                         },
                         onPan: { d in window = TimelineZoom.pan(window, byFraction: d, total: total) },
                         onReset: { window = 0...total },
-                        onHover: { hoverFraction = $0 }
+                        onHover: { hoverFraction = $0 },
+                        onSeek: { playback.seek(window.lowerBound + $0 * (window.upperBound - window.lowerBound)) }
                     )
                 }
             }

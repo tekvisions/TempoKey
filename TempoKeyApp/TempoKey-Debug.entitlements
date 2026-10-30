@@ -7,8 +7,10 @@
       XCTest injects its test bundle into the host app, and the sandbox's
       initializer aborts that injection when the bundle lives outside the
       container. Release builds use TempoKey.entitlements, which DO enable the
-      sandbox with user-selected read-only file access (the shipping config).
+      sandbox with user-selected read-write file access (the shipping config).
     -->
-    <key>com.apple.security.files.user-selected.read-only</key><true/>
+    <key>com.apple.security.files.user-selected.read-write</key><true/>
+    <key>com.apple.security.device.audio-input</key><true/>
+    <key>com.apple.security.files.bookmarks.app-scope</key><true/>
 </dict>
 </plist>

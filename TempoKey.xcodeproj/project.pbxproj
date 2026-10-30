@@ -11,21 +11,28 @@
 		1D69582C20E37AC1703DECF7 /* Clipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554D3E1F7D6371FFBE969BC1 /* Clipboard.swift */; };
 		20D50CB64011199045C60D1B /* TimelineSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D905668293F83C7F9873E9E /* TimelineSection.swift */; };
 		285A550A3DEC7298BAA53E54 /* UpdateBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89835C29695548E9B4697464 /* UpdateBanner.swift */; };
+		294D602394DF49ACDFC14CEF /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B1EE0B61652B352CD00A0C /* Library.swift */; };
 		2DF79918215FCA1EB46959B1 /* TimelineZoomTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E35D4523B00AC5FF9EAADA9 /* TimelineZoomTests.swift */; };
+		2E83B9596BCC819C72183AB8 /* PlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE90B7B5AD8E5627A4A4D9AA /* PlaybackController.swift */; };
 		36121A3C5EF68AF2571F6D6E /* TimelineInteractionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032E02FA415F9AF00F5D4BF8 /* TimelineInteractionView.swift */; };
 		3660AD76937FBC941FD3440C /* DisplayOverridesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBBA5E8032F8B3C55D5E5DF /* DisplayOverridesTests.swift */; };
 		397700737C22192DA1B57576 /* TempoTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFB29BC8FD4BFDD4BDB5CC1 /* TempoTimelineView.swift */; };
+		42FB01633BFE64A95EE017EB /* LiveInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C11E70D092A20C8FE72E92 /* LiveInput.swift */; };
 		5083421A2FAA1F9B52120AD6 /* ThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6C9929CF092B5B38E79CAC /* ThemeTests.swift */; };
 		63E2CCC37AD49601A6DA09FB /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1210C4546A1BF8855264C228 /* AppState.swift */; };
+		67BF83232583B9507B9ABF8E /* TransportBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B634A1DB819B194FA88BCC99 /* TransportBar.swift */; };
 		6C3127CC1677DBCEA5DDC750 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8CD49989E60E437D5EA9C4 /* Theme.swift */; };
 		794AF59ECCD28ABD7021B6BD /* UpdateCheckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB990CE8F89EDB46E5AE7E7 /* UpdateCheckTests.swift */; };
 		7CA15A482A69E3DB386C5740 /* CorrectionsBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D26A0ACA45662B4D2CF0748 /* CorrectionsBar.swift */; };
+		7D08555E42EC9FDDDC1BA468 /* ExportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85CD233E96FE06D976367A1 /* ExportTests.swift */; };
 		7F8251A6ECAE2AB4F72291E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37837CAE8B454B98093F38AE /* Assets.xcassets */; };
 		8EA614C4661DB1E85D228C19 /* TempoKeyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641F75875B3938F2B3AF847 /* TempoKeyApp.swift */; };
+		906C8488E529D1D14749FD78 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DBFDC6C01E3278B45408AD /* LibraryView.swift */; };
 		90A4C15FCE26A0005B615ABE /* UpdateCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4081FE919D030E48713162F6 /* UpdateCheck.swift */; };
 		97849868AABEA7682371C433 /* KeyRibbonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F223E88045622112C832CF05 /* KeyRibbonView.swift */; };
 		9A95D0BD27AD52BA34B9A414 /* TapTempo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4329D5D2D9245C4367E7EFEC /* TapTempo.swift */; };
 		A7BF045DA08DDB9B664109CA /* DisplayOverrides.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63899D1211C71B0FA707BB4 /* DisplayOverrides.swift */; };
+		AA3B2A6467B5B20FC47D6F5E /* MetadataExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE31027FBB77CA3619E1FBC /* MetadataExport.swift */; };
 		AA63E95A636BE79504D51BE8 /* ImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49BDEF2B9E7551B1797DEE2 /* ImportView.swift */; };
 		AF7678A2715A633E868FBDE6 /* AnalyzingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EAFEB945EF6DDE818BC75D /* AnalyzingView.swift */; };
 		B1FE74AB5AA9722CE292ED04 /* SummaryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58AF36E4441D5BEFEDB4528B /* SummaryHeaderView.swift */; };
@@ -34,7 +41,10 @@
 		C0739ABEE8F6045FC07A3D4C /* KeyOverviewMinimap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1380F1244EAC1D8DAEA6422A /* KeyOverviewMinimap.swift */; };
 		C8764BAEC7DD118F1705140C /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374F1A941C7039ED31918455 /* ReportView.swift */; };
 		CC1C7818A587C01C01864BAE /* TempoKeyCore in Frameworks */ = {isa = PBXBuildFile; productRef = C239E23EE73720E8007EFC55 /* TempoKeyCore */; };
+		EAE2F86B57A8E1FA7203882A /* EnergyTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471F8E86C16D18C1FCBB989A /* EnergyTimelineView.swift */; };
 		EF9208702648CF515BFAAD1F /* TimelineZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9278FC3A9D26264B29F3A74 /* TimelineZoom.swift */; };
+		F45E66A9FA0626D5AAEE7C4F /* AnalysisExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB473B74737D309DC96A5AC /* AnalysisExport.swift */; };
+		FBAEE1886C61F4991216B93F /* LibraryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AA83D468BFF15EC6993B96 /* LibraryTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		032E02FA415F9AF00F5D4BF8 /* TimelineInteractionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineInteractionView.swift; sourceTree = "<group>"; };
+		03AA83D468BFF15EC6993B96 /* LibraryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTests.swift; sourceTree = "<group>"; };
 		0FB990CE8F89EDB46E5AE7E7 /* UpdateCheckTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCheckTests.swift; sourceTree = "<group>"; };
 		1210C4546A1BF8855264C228 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		1380F1244EAC1D8DAEA6422A /* KeyOverviewMinimap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyOverviewMinimap.swift; sourceTree = "<group>"; };
@@ -59,27 +70,36 @@
 		3D26A0ACA45662B4D2CF0748 /* CorrectionsBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectionsBar.swift; sourceTree = "<group>"; };
 		4081FE919D030E48713162F6 /* UpdateCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCheck.swift; sourceTree = "<group>"; };
 		4329D5D2D9245C4367E7EFEC /* TapTempo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTempo.swift; sourceTree = "<group>"; };
+		471F8E86C16D18C1FCBB989A /* EnergyTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyTimelineView.swift; sourceTree = "<group>"; };
 		49DB2DBD7A351D53E939D0FE /* TempoKey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TempoKey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		554D3E1F7D6371FFBE969BC1 /* Clipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clipboard.swift; sourceTree = "<group>"; };
 		58AF36E4441D5BEFEDB4528B /* SummaryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryHeaderView.swift; sourceTree = "<group>"; };
 		5A183C827F73352468B12D0D /* TempoKeyAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TempoKeyAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A6C9929CF092B5B38E79CAC /* ThemeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTests.swift; sourceTree = "<group>"; };
+		5BE31027FBB77CA3619E1FBC /* MetadataExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataExport.swift; sourceTree = "<group>"; };
 		5D905668293F83C7F9873E9E /* TimelineSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineSection.swift; sourceTree = "<group>"; };
 		7AEBA273CE6F2454C533B2D1 /* TempoKey.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TempoKey.entitlements; sourceTree = "<group>"; };
 		89835C29695548E9B4697464 /* UpdateBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateBanner.swift; sourceTree = "<group>"; };
+		89B1EE0B61652B352CD00A0C /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		92EAFEB945EF6DDE818BC75D /* AnalyzingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzingView.swift; sourceTree = "<group>"; };
 		9641F75875B3938F2B3AF847 /* TempoKeyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoKeyApp.swift; sourceTree = "<group>"; };
 		A49BDEF2B9E7551B1797DEE2 /* ImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportView.swift; sourceTree = "<group>"; };
 		AA32F5D5DD5AF8AB80E55C24 /* ClipboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardTests.swift; sourceTree = "<group>"; };
 		AD8CD49989E60E437D5EA9C4 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		B634A1DB819B194FA88BCC99 /* TransportBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportBar.swift; sourceTree = "<group>"; };
 		B63899D1211C71B0FA707BB4 /* DisplayOverrides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayOverrides.swift; sourceTree = "<group>"; };
+		B85CD233E96FE06D976367A1 /* ExportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportTests.swift; sourceTree = "<group>"; };
+		B9C11E70D092A20C8FE72E92 /* LiveInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveInput.swift; sourceTree = "<group>"; };
 		BC6F06C0D6F87B278CE9BF94 /* TempoKey-Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TempoKey-Debug.entitlements"; sourceTree = "<group>"; };
 		C2D0D9F32B7CBEC924CF80D3 /* TempoKeyCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TempoKeyCore; path = TempoKeyCore; sourceTree = SOURCE_ROOT; };
 		C9278FC3A9D26264B29F3A74 /* TimelineZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineZoom.swift; sourceTree = "<group>"; };
 		D645F9FDACFB43B5348EE5FF /* TapTempoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapTempoTests.swift; sourceTree = "<group>"; };
 		DBFB29BC8FD4BFDD4BDB5CC1 /* TempoTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoTimelineView.swift; sourceTree = "<group>"; };
+		DE90B7B5AD8E5627A4A4D9AA /* PlaybackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackController.swift; sourceTree = "<group>"; };
 		DED76460098CF25605BDFCF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E8DBFDC6C01E3278B45408AD /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		ECBBA5E8032F8B3C55D5E5DF /* DisplayOverridesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayOverridesTests.swift; sourceTree = "<group>"; };
+		EDB473B74737D309DC96A5AC /* AnalysisExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisExport.swift; sourceTree = "<group>"; };
 		F223E88045622112C832CF05 /* KeyRibbonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyRibbonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,11 +118,16 @@
 		1C74511AA0546DE586237376 /* TempoKeyApp */ = {
 			isa = PBXGroup;
 			children = (
+				EDB473B74737D309DC96A5AC /* AnalysisExport.swift */,
 				1210C4546A1BF8855264C228 /* AppState.swift */,
 				37837CAE8B454B98093F38AE /* Assets.xcassets */,
 				554D3E1F7D6371FFBE969BC1 /* Clipboard.swift */,
 				B63899D1211C71B0FA707BB4 /* DisplayOverrides.swift */,
 				DED76460098CF25605BDFCF4 /* Info.plist */,
+				89B1EE0B61652B352CD00A0C /* Library.swift */,
+				B9C11E70D092A20C8FE72E92 /* LiveInput.swift */,
+				5BE31027FBB77CA3619E1FBC /* MetadataExport.swift */,
+				DE90B7B5AD8E5627A4A4D9AA /* PlaybackController.swift */,
 				4329D5D2D9245C4367E7EFEC /* TapTempo.swift */,
 				BC6F06C0D6F87B278CE9BF94 /* TempoKey-Debug.entitlements */,
 				7AEBA273CE6F2454C533B2D1 /* TempoKey.entitlements */,
@@ -130,14 +155,17 @@
 				92EAFEB945EF6DDE818BC75D /* AnalyzingView.swift */,
 				235E67D8E7D1FB1640935189 /* BeatTickView.swift */,
 				3D26A0ACA45662B4D2CF0748 /* CorrectionsBar.swift */,
+				471F8E86C16D18C1FCBB989A /* EnergyTimelineView.swift */,
 				A49BDEF2B9E7551B1797DEE2 /* ImportView.swift */,
 				1380F1244EAC1D8DAEA6422A /* KeyOverviewMinimap.swift */,
 				F223E88045622112C832CF05 /* KeyRibbonView.swift */,
+				E8DBFDC6C01E3278B45408AD /* LibraryView.swift */,
 				374F1A941C7039ED31918455 /* ReportView.swift */,
 				58AF36E4441D5BEFEDB4528B /* SummaryHeaderView.swift */,
 				DBFB29BC8FD4BFDD4BDB5CC1 /* TempoTimelineView.swift */,
 				032E02FA415F9AF00F5D4BF8 /* TimelineInteractionView.swift */,
 				5D905668293F83C7F9873E9E /* TimelineSection.swift */,
+				B634A1DB819B194FA88BCC99 /* TransportBar.swift */,
 				89835C29695548E9B4697464 /* UpdateBanner.swift */,
 			);
 			path = Views;
@@ -148,6 +176,8 @@
 			children = (
 				AA32F5D5DD5AF8AB80E55C24 /* ClipboardTests.swift */,
 				ECBBA5E8032F8B3C55D5E5DF /* DisplayOverridesTests.swift */,
+				B85CD233E96FE06D976367A1 /* ExportTests.swift */,
+				03AA83D468BFF15EC6993B96 /* LibraryTests.swift */,
 				D645F9FDACFB43B5348EE5FF /* TapTempoTests.swift */,
 				5A6C9929CF092B5B38E79CAC /* ThemeTests.swift */,
 				2E35D4523B00AC5FF9EAADA9 /* TimelineZoomTests.swift */,
@@ -273,6 +303,8 @@
 			files = (
 				B7894B9FB86CA72CEC2680D4 /* ClipboardTests.swift in Sources */,
 				3660AD76937FBC941FD3440C /* DisplayOverridesTests.swift in Sources */,
+				7D08555E42EC9FDDDC1BA468 /* ExportTests.swift in Sources */,
+				FBAEE1886C61F4991216B93F /* LibraryTests.swift in Sources */,
 				1AC4377474C3A3BB310BEDA5 /* TapTempoTests.swift in Sources */,
 				5083421A2FAA1F9B52120AD6 /* ThemeTests.swift in Sources */,
 				2DF79918215FCA1EB46959B1 /* TimelineZoomTests.swift in Sources */,
@@ -284,15 +316,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F45E66A9FA0626D5AAEE7C4F /* AnalysisExport.swift in Sources */,
 				AF7678A2715A633E868FBDE6 /* AnalyzingView.swift in Sources */,
 				63E2CCC37AD49601A6DA09FB /* AppState.swift in Sources */,
 				BCD91E8B86EF4B28E791511C /* BeatTickView.swift in Sources */,
 				1D69582C20E37AC1703DECF7 /* Clipboard.swift in Sources */,
 				7CA15A482A69E3DB386C5740 /* CorrectionsBar.swift in Sources */,
 				A7BF045DA08DDB9B664109CA /* DisplayOverrides.swift in Sources */,
+				EAE2F86B57A8E1FA7203882A /* EnergyTimelineView.swift in Sources */,
 				AA63E95A636BE79504D51BE8 /* ImportView.swift in Sources */,
 				C0739ABEE8F6045FC07A3D4C /* KeyOverviewMinimap.swift in Sources */,
 				97849868AABEA7682371C433 /* KeyRibbonView.swift in Sources */,
+				294D602394DF49ACDFC14CEF /* Library.swift in Sources */,
+				906C8488E529D1D14749FD78 /* LibraryView.swift in Sources */,
+				42FB01633BFE64A95EE017EB /* LiveInput.swift in Sources */,
+				AA3B2A6467B5B20FC47D6F5E /* MetadataExport.swift in Sources */,
+				2E83B9596BCC819C72183AB8 /* PlaybackController.swift in Sources */,
 				C8764BAEC7DD118F1705140C /* ReportView.swift in Sources */,
 				B1FE74AB5AA9722CE292ED04 /* SummaryHeaderView.swift in Sources */,
 				9A95D0BD27AD52BA34B9A414 /* TapTempo.swift in Sources */,
@@ -302,6 +341,7 @@
 				36121A3C5EF68AF2571F6D6E /* TimelineInteractionView.swift in Sources */,
 				20D50CB64011199045C60D1B /* TimelineSection.swift in Sources */,
 				EF9208702648CF515BFAAD1F /* TimelineZoom.swift in Sources */,
+				67BF83232583B9507B9ABF8E /* TransportBar.swift in Sources */,
 				285A550A3DEC7298BAA53E54 /* UpdateBanner.swift in Sources */,
 				90A4C15FCE26A0005B615ABE /* UpdateCheck.swift in Sources */,
 			);
@@ -380,15 +420,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TempoKeyApp/TempoKey.entitlements;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = TempoKeyApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tempokey.app;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.9;
@@ -499,14 +540,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "TempoKeyApp/TempoKey-Debug.entitlements";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = TempoKeyApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tempokey.app;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.9;

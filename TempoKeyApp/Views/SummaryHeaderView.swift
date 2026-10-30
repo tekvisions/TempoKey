@@ -15,13 +15,13 @@ struct SummaryHeaderView: View {
                     .font(.system(size: 46, weight: .bold, design: .rounded)).monospacedDigit()
                 HStack(spacing: 6) {
                     Text("BPM").font(.caption2).tracking(2).foregroundStyle(Theme.accent)
-                    Text("· \(Int((result.bpmConfidence * 100).rounded()))% conf")
+                    Text(state.overrides.isActive ? "· corrected" : "· \(Int((result.bpmConfidence * 100).rounded()))% conf")
                         .font(.caption2).foregroundStyle(.secondary)
                 }
             }
             VStack(alignment: .leading, spacing: 2) {
                 Text("\(key.name)  ·  \(key.camelot)").font(.system(size: 24, weight: .semibold))
-                Text("KEY · mixes with \(key.compatibleCamelot.joined(separator: " "))")
+                Text("\(key.openKey) Open Key · mixes with \(key.compatibleCamelot.joined(separator: " "))")
                     .font(.caption2).foregroundStyle(.secondary)
             }
             Spacer()

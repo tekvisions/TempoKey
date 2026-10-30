@@ -10,15 +10,16 @@ struct TimelineInteractionView: NSViewRepresentable {
     var onPan: (_ fractionDelta: Double) -> Void
     var onReset: () -> Void
     var onHover: (_ fraction: Double?) -> Void
+    var onSeek: (Double) -> Void
 
     func makeNSView(context: Context) -> InteractionNSView {
         let v = InteractionNSView()
-        v.apply(onZoom: onZoom, onPan: onPan, onReset: onReset, onHover: onHover)
+        v.apply(onZoom: onZoom, onPan: onPan, onReset: onReset, onHover: onHover, onSeek: onSeek)
         return v
     }
 
     func updateNSView(_ v: InteractionNSView, context: Context) {
-        v.apply(onZoom: onZoom, onPan: onPan, onReset: onReset, onHover: onHover)
+        v.apply(onZoom: onZoom, onPan: onPan, onReset: onReset, onHover: onHover, onSeek: onSeek)
     }
 
     final class InteractionNSView: NSView {
@@ -27,11 +28,15 @@ struct TimelineInteractionView: NSViewRepresentable {
         private var onReset: (() -> Void)?
         private var onHover: ((Double?) -> Void)?
         private var tracking: NSTrackingArea?
+        private var onSeek: ((Double) -> Void)?
+        private var dragged = false
 
         func apply(onZoom: @escaping (Double, Double) -> Void,
                    onPan: @escaping (Double) -> Void,
                    onReset: @escaping () -> Void,
-                   onHover: @escaping (Double?) -> Void) {
+                   onHover: @escaping (Double?) -> Void,
+                   onSeek: @escaping (Double) -> Void) {
+            self.onSeek = onSeek
             self.onZoom = onZoom; self.onPan = onPan; self.onReset = onReset; self.onHover = onHover
         }
 
@@ -66,11 +71,15 @@ struct TimelineInteractionView: NSViewRepresentable {
         }
 
         override func mouseDragged(with e: NSEvent) {
+            dragged = true
             onPan?(Double(-e.deltaX) / Double(max(1, bounds.width)))
             onHover?(fraction(e))
         }
 
+        override func mouseUp(with e: NSEvent) { if !dragged && e.clickCount == 1 { onSeek?(fraction(e)) } }
+
         override func mouseDown(with e: NSEvent) {
+            dragged = false
             if e.clickCount == 2 { onReset?() } else { onHover?(fraction(e)) }
         }
 

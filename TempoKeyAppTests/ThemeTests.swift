@@ -11,6 +11,7 @@ final class ThemeTests: XCTestCase {
     }
 
     func testBPMFormattingToHundredths() {
+        XCTAssertEqual(Theme.bpm(0), "—")
         XCTAssertEqual(Theme.bpm(130.834651), "130.83")
         XCTAssertEqual(Theme.bpm(120), "120.00")
         XCTAssertEqual(Theme.bpm(99.999), "100.00")

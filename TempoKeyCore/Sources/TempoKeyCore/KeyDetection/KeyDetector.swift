@@ -1,6 +1,6 @@
 import Foundation
 
-public struct KeySegment: Equatable {
+public struct KeySegment: Equatable, Codable, Sendable {
     public let start: Double
     public let end: Double
     public let key: MusicalKey
@@ -55,27 +55,34 @@ final class KeyDetector {
     }
 
     func analyze(_ samples: [Float]) -> KeyAnalysis {
+        analyze(samples, checkCancellation: {})
+    }
+
+    func analyze(_ samples: [Float], checkCancellation: () throws -> Void) rethrows -> KeyAnalysis {
         let winN = Int(windowSeconds * sampleRate)
         let hopN = max(1, Int(hopSeconds * sampleRate))
         var raw: [(start: Double, end: Double, key: MusicalKey, conf: Double)] = []
         var start = 0
         while start < samples.count {
             let end = min(start + winN, samples.count)
-            if end - start < winN / 2 { break }
+            try checkCancellation()
+            if end - start < winN / 2 && !raw.isEmpty { break }
             let slice = Array(samples[start..<end])
-            let chroma = chromagram.compute(slice, hop: nil)
+            let chroma = try chromagram.compute(slice, hop: nil, checkCancellation: checkCancellation)
             let (key, conf) = bestKey(chroma)
-            raw.append((Double(start)/sampleRate, Double(end)/sampleRate, key, conf))
+            raw.append((Double(start)/sampleRate, Double(end)/sampleRate, key, min(conf, Double(end - start) / Double(winN))))
             start += hopN
         }
         var segments: [KeySegment] = []
-        for r in raw {
+        for (index, r) in raw.enumerated() {
+            // Overlapping analysis windows vote on adjacent, disjoint timeline cells.
+            let cellEnd = index + 1 < raw.count ? raw[index + 1].start : Double(samples.count) / sampleRate
             if let last = segments.last, last.key == r.key {
-                segments[segments.count-1] = KeySegment(start: last.start, end: r.end,
+                segments[segments.count-1] = KeySegment(start: last.start, end: cellEnd,
                                                         key: last.key,
                                                         confidence: max(last.confidence, r.conf))
             } else {
-                segments.append(KeySegment(start: r.start, end: r.end, key: r.key, confidence: r.conf))
+                segments.append(KeySegment(start: r.start, end: cellEnd, key: r.key, confidence: r.conf))
             }
         }
         var durationByKey: [String: (MusicalKey, Double)] = [:]

@@ -14,5 +14,6 @@
     <key>LSApplicationCategoryType</key><string>public.app-category.music</string>
     <key>NSHumanReadableCopyright</key><string>Includes a Swift port of Beat-and-Tempo-Tracking (MIT, © Michael Krzyzaniak).</string>
     <key>NSHighResolutionCapable</key><true/>
+    <key>NSMicrophoneUsageDescription</key><string>TempoKey analyzes live audio for tempo and musical key on your Mac. Audio is never saved or uploaded.</string>
 </dict>
 </plist>

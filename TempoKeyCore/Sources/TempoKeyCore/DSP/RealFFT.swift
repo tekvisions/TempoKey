@@ -1,7 +1,7 @@
 import Accelerate
 
 /// Real-input FFT helpers built on vDSP. `size` must be a power of two.
-final class RealFFT {
+final class RealFFT: RealTransform {
     let size: Int
     private let log2n: vDSP_Length
     private let setup: FFTSetup

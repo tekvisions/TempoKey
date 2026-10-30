@@ -10,7 +10,8 @@ enum Theme {
 
     /// BPM to two decimal places (hundredths), e.g. "130.83".
     static func bpm(_ value: Double) -> String {
-        String(format: "%.2f", value)
+        guard value.isFinite, value > 0 else { return "—" }
+        return String(format: "%.2f", value)
     }
 
     struct KeyColor { let hue: Double; let saturation: Double; let brightness: Double }
