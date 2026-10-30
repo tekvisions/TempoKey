@@ -1,9 +1,9 @@
 # TempoKey roadmap
 
-Updated 2026-10-30. **macOS first**, per the current product scope. The working build is
-**0.7.0 (4)**; implementation does not imply a published, signed/notarized release.
+Updated 2026-10-30. **macOS first**, per the current product scope. Release **0.7.0 (4)** consolidates the macOS milestones below. See the
+[release notes](releases/v0.7.0.md) for the full change list and validation limits.
 
-## Implemented in the macOS working build
+## Implemented in macOS 0.7.0
 
 | Milestone | Status | Delivered behavior |
 |---|---|---|
@@ -66,7 +66,7 @@ These are validation/release tasks, not completed claims:
 
 ## Subsequent milestones
 
-1. Complete the macOS release gates and publish 0.7.0; use patch releases for fixes.
+1. Complete the remaining hardware/accuracy checks; use 0.7.x patch releases for fixes.
 2. Improve analysis using a measured corpus; add broader meter support and interoperable
    M4A key atoms if user demand warrants it.
 3. Implement Windows backends/frontend and validate platform parity; see [WINDOWS.md](WINDOWS.md).

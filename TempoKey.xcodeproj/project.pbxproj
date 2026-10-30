@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19FC94C105C6E90C1426CA1E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 68CFC83BC4F2341EFD1AFA23 /* LICENSE */; };
 		1AC4377474C3A3BB310BEDA5 /* TapTempoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D645F9FDACFB43B5348EE5FF /* TapTempoTests.swift */; };
 		1D69582C20E37AC1703DECF7 /* Clipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554D3E1F7D6371FFBE969BC1 /* Clipboard.swift */; };
 		20D50CB64011199045C60D1B /* TimelineSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D905668293F83C7F9873E9E /* TimelineSection.swift */; };
@@ -26,6 +27,7 @@
 		7CA15A482A69E3DB386C5740 /* CorrectionsBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D26A0ACA45662B4D2CF0748 /* CorrectionsBar.swift */; };
 		7D08555E42EC9FDDDC1BA468 /* ExportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85CD233E96FE06D976367A1 /* ExportTests.swift */; };
 		7F8251A6ECAE2AB4F72291E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37837CAE8B454B98093F38AE /* Assets.xcassets */; };
+		8355B4035F1ADAAD10DB4C15 /* NOTICE.md in Resources */ = {isa = PBXBuildFile; fileRef = 5AEA0F2E959D765A6FCA4379 /* NOTICE.md */; };
 		8EA614C4661DB1E85D228C19 /* TempoKeyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641F75875B3938F2B3AF847 /* TempoKeyApp.swift */; };
 		906C8488E529D1D14749FD78 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DBFDC6C01E3278B45408AD /* LibraryView.swift */; };
 		90A4C15FCE26A0005B615ABE /* UpdateCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4081FE919D030E48713162F6 /* UpdateCheck.swift */; };
@@ -76,8 +78,10 @@
 		58AF36E4441D5BEFEDB4528B /* SummaryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryHeaderView.swift; sourceTree = "<group>"; };
 		5A183C827F73352468B12D0D /* TempoKeyAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TempoKeyAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A6C9929CF092B5B38E79CAC /* ThemeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTests.swift; sourceTree = "<group>"; };
+		5AEA0F2E959D765A6FCA4379 /* NOTICE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = NOTICE.md; sourceTree = "<group>"; };
 		5BE31027FBB77CA3619E1FBC /* MetadataExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataExport.swift; sourceTree = "<group>"; };
 		5D905668293F83C7F9873E9E /* TimelineSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineSection.swift; sourceTree = "<group>"; };
+		68CFC83BC4F2341EFD1AFA23 /* LICENSE */ = {isa = PBXFileReference; path = LICENSE; sourceTree = "<group>"; };
 		7AEBA273CE6F2454C533B2D1 /* TempoKey.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TempoKey.entitlements; sourceTree = "<group>"; };
 		89835C29695548E9B4697464 /* UpdateBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateBanner.swift; sourceTree = "<group>"; };
 		89B1EE0B61652B352CD00A0C /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
@@ -186,12 +190,22 @@
 			path = TempoKeyAppTests;
 			sourceTree = "<group>";
 		};
+		E918263B20E70EE5DBE93CEF /* TempoKeyCore */ = {
+			isa = PBXGroup;
+			children = (
+				5AEA0F2E959D765A6FCA4379 /* NOTICE.md */,
+			);
+			path = TempoKeyCore;
+			sourceTree = "<group>";
+		};
 		F2A3EB240860E0DE92A1DD0D = {
 			isa = PBXGroup;
 			children = (
+				68CFC83BC4F2341EFD1AFA23 /* LICENSE */,
 				FB70F1E29E5A45FD10FEF4FE /* Packages */,
 				1C74511AA0546DE586237376 /* TempoKeyApp */,
 				C2E7578178F9B737DBCEB745 /* TempoKeyAppTests */,
+				E918263B20E70EE5DBE93CEF /* TempoKeyCore */,
 				214BAEEFAA04D0E5315B5F5F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -291,6 +305,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F8251A6ECAE2AB4F72291E5 /* Assets.xcassets in Resources */,
+				19FC94C105C6E90C1426CA1E /* LICENSE in Resources */,
+				8355B4035F1ADAAD10DB4C15 /* NOTICE.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

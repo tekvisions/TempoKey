@@ -131,6 +131,6 @@ spctl -a -vvv /Applications/TempoKey.app                   # → accepted (Notar
 - **CI can't find the signing identity** → the keychain import step failed; check
   `DEVELOPER_ID_CERT_PASSWORD` and that the `.p12` actually contains the Developer ID cert + key.
 - **App opens but can't read dropped files** → expected only if entitlements are wrong; Release
-  ships the sandbox + `user-selected.read-only` entitlement, which `package-dmg.sh` applies.
+  ships the sandbox + `user-selected.read-write` entitlement, which `package-dmg.sh` applies.
 
 See [`docs/RELEASING.md`](RELEASING.md) for the underlying signing/notarization concepts.

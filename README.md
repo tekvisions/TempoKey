@@ -7,7 +7,8 @@ Analysis runs fully privately on your Mac; audio is never uploaded. The optional
 ## Build and test
 
 Requires Xcode with the macOS 14+ SDK and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
-The current development build is **0.7.0 (4)**. No new release has been published.
+**0.7.0 (4)** is available from [GitHub Releases](https://github.com/tekvisions/TempoKey/releases/tag/v0.7.0).
+The downloadable DMG supports Apple Silicon and Intel Macs.
 
 ```sh
 xcodegen generate

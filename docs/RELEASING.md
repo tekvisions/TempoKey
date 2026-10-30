@@ -2,25 +2,16 @@
 
 This documents how to package TempoKey so it opens cleanly on **other** people's Macs.
 
-## TL;DR readiness status
+## Release requirements
 
-| Item | Status |
-|---|---|
-| Universal binary (arm64 + x86_64) | ✅ yes |
-| Hardened runtime enabled | ✅ yes |
-| App Sandbox + user-selected file access (Release) | ✅ yes |
-| Bundle id / version (`com.tempokey.app`, 0.1.0) | ✅ yes |
-| Runs across formats/lengths without crashing | ✅ verified |
-| **Code signing for distribution** | ❌ **ad-hoc only — must fix** |
-| **Notarization** | ❌ **required for download** |
-| App icon | ✅ yes (circle-of-fifths wheel + tempo pulse) |
-| Minimum macOS | 14.0 (won't run on 13 or earlier) |
+TempoKey 0.7.0 (build 4) targets macOS 14+ on Apple Silicon and Intel. The packaging
+script verifies both architectures and enables hardened runtime and App Sandbox.
+Distribution uses Developer ID signing, notarization, stapling, and a mandatory
+Gatekeeper check. Release omits `get-task-allow`; selected-file read/write, bookmark,
+microphone and outbound networking entitlements support the current feature set.
 
-**The blocker:** the local build is *ad-hoc* signed (`Signature=adhoc`, `spctl` → `rejected`).
-A DMG of that build, once downloaded (and therefore quarantined), will be blocked by
-Gatekeeper — users get *"TempoKey is damaged and can't be opened"* or *"cannot be opened
-because Apple cannot check it for malicious software."* To distribute by download you must
-**sign with a Developer ID Application certificate and notarize**.
+Use `scripts/package-dmg.sh` with `DEVELOPER_ID` and `NOTARY_PROFILE` set for public
+releases. A local development-signed build is not a notarized distribution artifact.
 
 ## Prerequisites (one-time)
 
@@ -106,5 +97,5 @@ general audience. Proper Developer ID + notarization is the only smooth download
 
 - Requires **macOS 14+**.
 - Tempo is reliable on clearly rhythmic music; weakly-rhythmic/ambient material can yield an
-  octave-off or arbitrary BPM. Very short clips (< ~3 s) report `0.00 BPM`.
+  octave-off or arbitrary BPM. Clips shorter than four seconds display no tempo estimate (a dash).
 - Key estimates are approximate, especially on percussive/atonal material (confidence shown).

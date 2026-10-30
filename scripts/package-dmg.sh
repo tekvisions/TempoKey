@@ -29,6 +29,7 @@ xcodebuild -project TempoKey.xcodeproj -scheme "$SCHEME" -configuration "$CONFIG
   ONLY_ACTIVE_ARCH=NO clean build >/dev/null
 APP="$DERIVED/Build/Products/$CONFIG/TempoKey.app"
 [ -d "$APP" ] || { echo "✗ build product not found at $APP"; exit 1; }
+lipo -verify_arch arm64 x86_64 "$APP/Contents/MacOS/TempoKey"
 
 VERSION="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$APP/Contents/Info.plist")"
 mkdir -p "$DIST"
@@ -69,7 +70,7 @@ if [ -n "${DEVELOPER_ID:-}" ]; then
     xcrun notarytool submit "$DMG" --keychain-profile "$NOTARY_PROFILE" --wait
     xcrun stapler staple "$DMG"
     echo "▶ Gatekeeper check:"
-    spctl -a -vvv -t open --context context:primary-signature "$DMG" || true
+    spctl -a -vvv -t open --context context:primary-signature "$DMG"
   fi
 fi
 

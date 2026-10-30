@@ -15,7 +15,12 @@ targets:
   TempoKey:
     type: application
     platform: macOS
-    sources: [TempoKeyApp]
+    sources:
+      - path: TempoKeyApp
+      - path: LICENSE
+        buildPhase: resources
+      - path: TempoKeyCore/NOTICE.md
+        buildPhase: resources
     dependencies:
       - package: TempoKeyCore
         product: TempoKeyCore
