@@ -61,8 +61,9 @@ These are validation/release tasks, not completed claims:
   navigation, and timeline gestures. Home/report/library visual smoke checks passed in
   dark/light mode; exhaustive accessibility and sizing checks remain.
 - [ ] Profile hour-long tracks and large folders for memory, CPU, cancellation latency.
-- [ ] Build Developer ID DMG, notarize, staple, validate Gatekeeper, and publish only after
-  release approval. Follow [RELEASING.md](RELEASING.md) and [RELEASING-GITHUB.md](RELEASING-GITHUB.md).
+- [x] Build universal Developer ID DMG, notarize app and DMG, staple both tickets, and
+  validate Gatekeeper. GitHub distribution was explicitly authorized on 2026-10-30.
+  Follow [RELEASING.md](RELEASING.md) and [RELEASING-GITHUB.md](RELEASING-GITHUB.md).
 
 ## Subsequent milestones
 

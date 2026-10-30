@@ -48,10 +48,26 @@ After the restart, native UI automation became available. Verified the sandboxed
 - External-drive exports and device/file removal during operations.
 - Exhaustive window-resizing, VoiceOver and gesture usability testing.
 - Real-music accuracy corpus, hour-long file memory profile, minimum supported macOS runtime.
-- Developer ID notarization, Gatekeeper distribution validation, release publishing, Windows.
+- Windows implementation/runtime validation.
 
 See [ROADMAP.md](ROADMAP.md) for the release checklist. The environment prints unrelated
 CoreSimulator-version and AppIntents metadata-extraction diagnostics; macOS tests/builds
 complete successfully. No simulator is used.
 
 Runnable local artifact: `dist/TempoKey-0.7.0.app` (development signed; not notarized).
+
+## GitHub release distribution verification
+
+The user subsequently authorized GitHub release publication. Built `TempoKey-0.7.0.dmg`
+from the release source with the universal packaging script and Developer ID Application:
+Kymata Labs LLC (72G9XN68CV).
+
+- App notarization accepted: `f4a99b9d-647b-45f4-88b6-87bbe9f0e204`.
+- DMG notarization accepted: `66f9ff59-567c-4154-9686-a7cc9969fa77`.
+- App and DMG tickets stapled and independently validated.
+- Gatekeeper accepts both artifacts as `Notarized Developer ID`.
+- Mounted DMG verified: version 0.7.0, arm64 and x86_64 slices, MIT license and upstream
+  notice resources, sandbox/input/bookmark/file/network entitlements, no `get-task-allow`.
+- Integrated-source verification again passed 49 core and 34 hosted app tests.
+- Distribution assets: `TempoKey-0.7.0.dmg` and `TempoKey-0.7.0.sha256`.
+- Full release notes: [v0.7.0](releases/v0.7.0.md).
