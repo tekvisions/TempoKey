@@ -2,7 +2,7 @@
 
 Offline BPM and musical-key analysis for macOS 14+. Import music, compare a batch of
 tracks, inspect tempo/key/energy timelines, listen and correct estimates, then export results.
-Audio stays on your Mac. The optional update check contacts GitHub, without sending audio.
+Analysis runs fully privately on your Mac; audio is never uploaded. The optional update check contacts GitHub, without sending audio.
 
 ## Build and test
 
