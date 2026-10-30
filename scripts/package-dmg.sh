@@ -29,7 +29,8 @@ xcodebuild -project TempoKey.xcodeproj -scheme "$SCHEME" -configuration "$CONFIG
   ONLY_ACTIVE_ARCH=NO clean build >/dev/null
 APP="$DERIVED/Build/Products/$CONFIG/TempoKey.app"
 [ -d "$APP" ] || { echo "✗ build product not found at $APP"; exit 1; }
-lipo "$APP/Contents/MacOS/TempoKey" -verify_arch arm64 x86_64
+lipo "$APP/Contents/MacOS/TempoKey" -verify_arch arm64
+lipo "$APP/Contents/MacOS/TempoKey" -verify_arch x86_64
 
 VERSION="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$APP/Contents/Info.plist")"
 mkdir -p "$DIST"
