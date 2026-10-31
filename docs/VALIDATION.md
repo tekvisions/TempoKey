@@ -27,7 +27,7 @@ Local logs and private fixtures are under `.superpowers/validation/0.7.1/` (git 
 
 Three private recordings (239.49, 326.23 and 379.60 seconds, stereo 44.1 kHz MP3) analyze
 successfully in the CLI and through native multi-selection in the sandboxed Release app.
-Typical measured analysis times were 0.9–1.4 seconds per file. Whole-track predictions
+Typical measured analysis times were 0.9–1.6 seconds per file. Whole-track predictions
 remain approximately 89.79, 108.26 and 100.93 BPM; these are **not reference labels**.
 No reference BPM/key tags were present. Accuracy denominators therefore remain zero.
 
@@ -71,7 +71,17 @@ unplug/rate changes and long capture; audible metronome/loop timing; external dr
 minimum-size/full keyboard/VoiceOver audit; large analyzed libraries and diverse long-file
 codecs; Intel and minimum-supported macOS runtime. Windows/iOS remain deferred.
 
-Distribution verification follows below when the 0.7.1 signed/notarized artifacts are ready.
+## 0.7.1 distribution verification
+
+- Universal Developer ID DMG built successfully with Kymata Labs LLC (72G9XN68CV).
+- App notarization accepted: `5e98070b-f4ee-49dc-8b0c-90aa31a910f3`.
+- DMG notarization accepted: `afb5428f-c23b-47fe-ba1e-bfe2c746b19a`.
+- Both tickets stapled and independently validated; app and DMG accepted by Gatekeeper as
+  Notarized Developer ID.
+- Mounted image verified: version 0.7.1, build 5; arm64 and x86_64 slices; sandbox, audio
+  input, scoped bookmarks and user-selected read/write; no get-task-allow; bundled licenses.
+- Assets: `TempoKey-0.7.1.dmg` and `TempoKey-0.7.1.sha256`.
+- DMG SHA-256: `e74e52a793879afc051c7e7059ea47f73e344f67f0e6944ca61bf38dd9aee6f0`.
 
 ---
 
