@@ -20,6 +20,19 @@ final class TempoEvidenceTests: XCTestCase {
         XCTAssertLessThan(stable.bpmConfidence, 1, "Heuristic evidence is not certainty")
     }
 
+    func testShortResumedSectionIsNotSmoothedTogetherWithPreSilenceTempo() {
+        for resumedDuration in [3.5, 4.0] {
+            let samples = TestSignals.clickTrack(bpm: 90, seconds: 12)
+                + [Float](repeating: 0, count: 44100 * 8)
+                + TestSignals.clickTrack(bpm: 150, seconds: resumedDuration)
+            let result = BeatTempoTracker().process(samples)
+            let resumed = result.tempoSeries.filter { $0.time >= 20 }
+            XCTAssertFalse(resumed.isEmpty)
+            for point in resumed { XCTAssertEqual(point.bpm, 150, accuracy: 4) }
+            XCTAssertFalse(result.tempoSeries.contains { $0.time > 14 && $0.time < 20 })
+        }
+    }
+
     func testTempoRestartsAfterSilentBreakWithoutOldHistogram() {
         let samples = TestSignals.clickTrack(bpm: 90, seconds: 12)
             + [Float](repeating: 0, count: 44100 * 8)

@@ -7,7 +7,7 @@ Analysis runs fully privately on your Mac; audio is never uploaded. The optional
 ## Build and test
 
 Requires Xcode with the macOS 14+ SDK and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
-**0.7.0 (4)** is available from [GitHub Releases](https://github.com/tekvisions/TempoKey/releases/tag/v0.7.0).
+**0.7.1 (5)** is available from [GitHub Releases](https://github.com/tekvisions/TempoKey/releases/tag/v0.7.1).
 The downloadable DMG supports Apple Silicon and Intel Macs.
 
 ```sh
@@ -55,6 +55,9 @@ triple/quadruple accents and otherwise stays unknown. Sections use neutral label
   corrections, security-scoped recents, export services, playback and bounded live capture.
 - `TempoKeyAppTests/`: hosted tests for app logic, batch/lifecycle behavior, CSV/JSON/PNG,
   metadata round trips, recent bookmarks and transport bounds.
+
+For repeatable local corpus measurements and independently labeled accuracy checks, see
+[Benchmarking](docs/BENCHMARKING.md). Audio stays local; unlabeled music is not scored as accurate.
 
 See [the current roadmap](docs/ROADMAP.md) for implemented scope, limitations and outstanding
 hardware/sandbox/release gates. Windows is deferred; see [WINDOWS.md](docs/WINDOWS.md).

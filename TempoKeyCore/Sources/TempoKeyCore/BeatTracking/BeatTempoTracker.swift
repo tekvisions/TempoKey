@@ -71,7 +71,16 @@ final class BeatTempoTracker {
 
         // Edge-preserving median smoothing of the displayed tempo: removes isolated frame-to-frame
         // flips (and ambiguous intro/outro/transition spikes) while keeping genuine tempo steps.
-        let smoothBPM = Self.medianFilter(rawBPM, radius: 4)
+        var smoothBPM: [Double] = []
+        var runStart = 0
+        // Missing evidence separates runs. Smoothing across silence would let the old
+        // tempo outvote a short resumed section even though its histogram was reset.
+        for end in 0...rawBPM.count {
+            if end == rawBPM.count || (end > 0 && times[end] - times[end - 1] > 0.5) {
+                smoothBPM.append(contentsOf: Self.medianFilter(Array(rawBPM[runStart..<end]), radius: 4))
+                runStart = end
+            }
+        }
         let series = zip(times, smoothBPM).map { (time: $0.0, bpm: $0.1) }
 
         // Overall = median of the smoothed series (robust to intro/outro/transition outliers).

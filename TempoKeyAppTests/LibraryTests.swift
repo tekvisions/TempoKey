@@ -15,6 +15,17 @@ final class LibraryTests: XCTestCase {
         XCTAssertEqual(try LibraryFiles.expand([root, song]), [song])
     }
 
+    func testLargeFolderExpansionRemainsSortedAndDeduplicated() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+        for index in 0..<2000 { try Data().write(to: root.appendingPathComponent("Track \(index).mp3")) }
+        let files = try LibraryFiles.expand([root, root, root.appendingPathComponent("Track 10.mp3")])
+        XCTAssertEqual(files.count, 2000)
+        XCTAssertEqual(files.first?.lastPathComponent, "Track 0.mp3")
+        XCTAssertEqual(files.last?.lastPathComponent, "Track 1999.mp3")
+    }
+
     func testCSVQuotesFileNamesAndUsesCorrections() {
         let result = AnalysisResult(fileName: "a,\"b\".wav", duration: 10, overallBPM: 120,
                                     overallKey: .init(tonic: .c, mode: .major), bpmConfidence: 0.8,

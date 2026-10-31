@@ -73,7 +73,10 @@ enum MetadataExport {
                 throw MetadataExportError(message: "This MP3 uses an unsupported ID3 tag variant. Export JSON instead; the original file is unchanged.")
             }
             let size = header[6..<10].reduce(0) { ($0 << 7) | Int($1) }
-            guard size <= 16 * 1024 * 1024, let tag = try reader.read(upToCount: size), tag.count == size else { throw MetadataExportError(message: "The MP3 metadata is invalid or too large.") }
+            guard size <= 16 * 1024 * 1024 else { throw MetadataExportError(message: "The MP3 metadata is invalid or too large.") }
+            // FileHandle returns nil for a zero-byte read; an empty ID3 tag is valid.
+            let tag = size == 0 ? Data() : (try reader.read(upToCount: size) ?? Data())
+            guard tag.count == size else { throw MetadataExportError(message: "The MP3 metadata is invalid or too large.") }
             retained = try retainedFrames(tag, version: version)
             audioOffset = UInt64(size + 10)
         }
@@ -106,8 +109,11 @@ enum MetadataExport {
         return result
     }
     private static func frame(_ id: String, value: String, version: UInt8) -> Data {
-        var payload = Data([version == 4 ? 3 : 1])
-        payload.append(value.data(using: version == 4 ? .utf8 : .utf16)!)
+        // Our BPM/key/Camelot fields are ASCII. Latin-1 is valid in ID3v2.3 and
+        // avoids the per-string BOM requirement for TXXX's description and value.
+        // Existing unrelated frames retain their original encodings and bytes.
+        var payload = Data([version == 4 ? 3 : 0])
+        payload.append(value.data(using: version == 4 ? .utf8 : .isoLatin1)!)
         var data = Data(id.utf8); data.append(sizeBytes(payload.count, syncSafe: version == 4)); data.append(contentsOf: [0, 0]); data.append(payload)
         return data
     }

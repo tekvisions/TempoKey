@@ -1,7 +1,7 @@
 # TempoKey roadmap
 
-Updated 2026-10-30. **macOS first**, per the current product scope. Release **0.7.0 (4)** consolidates the macOS milestones below. See the
-[release notes](releases/v0.7.0.md) for the full change list and validation limits.
+Updated 2026-10-30. **macOS first**, per the current product scope. Release **0.7.1 (5)** stabilizes the macOS milestones delivered in 0.7.0. See the
+[release notes](releases/v0.7.1.md) for the full change list and validation limits.
 
 ## Implemented in macOS 0.7.0
 
@@ -46,6 +46,20 @@ Updated 2026-10-30. **macOS first**, per the current product scope. Release **0.
 - Live buffers have fixed capacity; stopping invalidates permission/analysis callbacks.
 - Appearance persists; library navigation retains an in-progress batch.
 
+## Stabilization delivered in 0.7.1
+
+- [x] Analyze three supplied real MP3s locally and in the sandboxed Release library; verify
+  tagged-copy audio/metadata preservation. Their reference BPM/key labels remain unknown.
+- [x] Add an opt-in local [corpus benchmark](BENCHMARKING.md) with reference labels, separate
+  octave metrics, per-file errors and an explicit strict-label gate.
+- [x] Fix stale tempo/beat evidence through silence, cross-gap smoothing and silent key votes.
+- [x] Replace misleading percentage confidence with whole-track evidence and neutral gaps.
+- [x] Profile a one-hour track: reduce peak resident memory about 47% (1.26 GiB to 681 MiB);
+  verify cooperative decode/DSP cancellation and 2,000-file folder enumeration.
+- [x] Improve timeline buttons/accessibility; verify dark/light reports, zoom/pan and native
+  sandboxed MP3 export outside the imported directory.
+- [x] Fix ID3v2.3 Camelot interoperability and empty-tag handling with regressions.
+
 ## Release gates — remaining work
 
 These are validation/release tasks, not completed claims:
@@ -60,7 +74,8 @@ These are validation/release tasks, not completed claims:
 - [ ] Visually inspect minimum-width layout, dark/light mode, VoiceOver, keyboard-only
   navigation, and timeline gestures. Home/report/library visual smoke checks passed in
   dark/light mode; exhaustive accessibility and sizing checks remain.
-- [ ] Profile hour-long tracks and large folders for memory, CPU, cancellation latency.
+- [ ] Extend the measured one-hour/single-file and 2,000-entry enumeration checks to diverse
+  codecs, large analyzed libraries and lower-memory/Intel hardware.
 - [x] Build universal Developer ID DMG, notarize app and DMG, staple both tickets, and
   validate Gatekeeper. GitHub distribution was explicitly authorized on 2026-10-30.
   Follow [RELEASING.md](RELEASING.md) and [RELEASING-GITHUB.md](RELEASING-GITHUB.md).

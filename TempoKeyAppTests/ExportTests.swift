@@ -38,6 +38,43 @@ final class ExportTests: XCTestCase {
         XCTAssertTrue(tag.contains("140")); XCTAssertFalse(tag.contains("120"))
         XCTAssertTrue(tag.contains("TKEY")); XCTAssertTrue(tag.contains("TEMPOKEY_CAMELOT")); XCTAssertTrue(tag.contains("8B"))
     }
+    func testID3v23CamelotValueDecodesIndependentlyAfterDescription() async throws {
+        let dir = try directory(); defer { try? FileManager.default.removeItem(at: dir) }
+        let source = dir.appendingPathComponent("source.mp3"), destination = dir.appendingPathComponent("copy.mp3")
+        // ID3v2.3 tag with one padding byte followed by an opaque audio payload.
+        try Data([73, 68, 51, 3, 0, 0, 0, 0, 0, 1, 0, 0xff, 0xfb, 0x90, 0x64]).write(to: source)
+        try await MetadataExport.writeCopy(source: source, destination: destination, bpm: 128, key: .init(tonic: .a, mode: .minor))
+        let bytes = try Data(contentsOf: destination)
+        let tagSize = bytes[6..<10].reduce(0) { ($0 << 7) | Int($1) }
+        var offset = 10
+        var values: [String] = []
+        while offset + 10 <= 10 + tagSize {
+            let size = bytes[offset + 4..<offset + 8].reduce(0) { ($0 << 8) | Int($1) }
+            if String(data: bytes[offset..<offset + 4], encoding: .ascii) == "TXXX" {
+                let payload = Data(bytes[offset + 10..<offset + 10 + size])
+                if payload[0] == 1 {
+                    // ID3v2.3 requires a BOM on EACH Unicode string, not just the description.
+                    let separator = try XCTUnwrap(stride(from: 1, to: payload.count - 1, by: 2).first { payload[$0] == 0 && payload[$0 + 1] == 0 })
+                    values.append(try XCTUnwrap(String(data: payload[(separator + 2)...], encoding: .utf16)))
+                } else {
+                    let strings = try XCTUnwrap(String(data: payload.dropFirst(), encoding: .isoLatin1)).components(separatedBy: "\0")
+                    XCTAssertEqual(strings.first, "TEMPOKEY_CAMELOT")
+                    values.append(try XCTUnwrap(strings.last))
+                }
+            }
+            offset += 10 + size
+        }
+        XCTAssertEqual(values, ["8A"])
+    }
+
+    func testEmptyID3v23TagCanBeExported() async throws {
+        let dir = try directory(); defer { try? FileManager.default.removeItem(at: dir) }
+        let source = dir.appendingPathComponent("source.mp3"), destination = dir.appendingPathComponent("copy.mp3")
+        try Data([73, 68, 51, 3, 0, 0, 0, 0, 0, 0, 0xff, 0xfb, 0x90, 0x64]).write(to: source)
+        try await MetadataExport.writeCopy(source: source, destination: destination, bpm: 128, key: .init(tonic: .a, mode: .minor))
+        XCTAssertEqual(try Data(contentsOf: destination).suffix(4), Data([0xff, 0xfb, 0x90, 0x64]))
+    }
+
     func testUnsupportedID3LeavesDestinationUntouched() async throws {
         let dir = try directory(); defer { try? FileManager.default.removeItem(at: dir) }
         let source = dir.appendingPathComponent("source.mp3"), destination = dir.appendingPathComponent("copy.mp3")
