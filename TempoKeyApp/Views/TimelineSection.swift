@@ -33,12 +33,16 @@ struct TimelineSection: View {
             Spacer()
             Button { playback.loopRange = TransportBounds.loop(window, duration: total); playback.seek(window.lowerBound) } label: { Label("Loop region", systemImage: "repeat") }
                 .disabled(!playback.available).help("Loop the visible timeline range")
+            Button { window = TimelineZoom.pan(window, byFraction: -0.5, total: total) } label: { Image(systemName: "chevron.left") }
+                .disabled(window.lowerBound <= 0).help("Earlier timeline region").accessibilityLabel("Earlier timeline region")
+            Button { window = TimelineZoom.pan(window, byFraction: 0.5, total: total) } label: { Image(systemName: "chevron.right") }
+                .disabled(window.upperBound >= total).help("Later timeline region").accessibilityLabel("Later timeline region")
             Button { zoom(1 / 1.6) } label: { Image(systemName: "minus.magnifyingglass") }
-                .help("Zoom out")
+                .help("Zoom out").accessibilityLabel("Zoom out")
             Button { window = 0...total } label: { Text("Reset") }
                 .disabled(!isZoomed)
             Button { zoom(1.6) } label: { Image(systemName: "plus.magnifyingglass") }
-                .help("Zoom in")
+                .help("Zoom in").accessibilityLabel("Zoom in")
         }
         .buttonStyle(.borderless).font(.caption)
     }
@@ -103,10 +107,10 @@ struct TimelineSection: View {
 
     private func readout(at t: Double) -> String {
         var parts = [Theme.duration(t)]
-        if let bpm = result.tempoSeries.min(by: { abs($0.time - t) < abs($1.time - t) })?.bpm {
+        if let bpm = TempoTimelineData.bpm(at: t, series: result.tempoSeries) {
             parts.append("\(Theme.bpm(bpm)) BPM")
         }
-        if let key = result.keySeries.first(where: { t >= $0.start && t < $0.end })?.key {
+        if let key = result.keySeries.first(where: { t >= $0.start && t < $0.end && $0.confidence > 0 })?.key {
             parts.append(key.name)
         }
         return parts.joined(separator: " · ")

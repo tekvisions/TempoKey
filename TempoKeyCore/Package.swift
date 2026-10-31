@@ -6,6 +6,7 @@ let package = Package(
     platforms: [.macOS(.v13)],
     products: [
         .library(name: "TempoKeyCore", targets: ["TempoKeyCore"]),
+        .executable(name: "tempokey-benchmark", targets: ["TempoKeyBenchmark"]),
     ],
     targets: [
         .target(
@@ -17,6 +18,7 @@ let package = Package(
                 .unsafeFlags(["-O"]),
             ]
         ),
+        .executableTarget(name: "TempoKeyBenchmark", dependencies: ["TempoKeyCore"]),
         .testTarget(name: "TempoKeyCoreTests", dependencies: ["TempoKeyCore"]),
     ]
 )

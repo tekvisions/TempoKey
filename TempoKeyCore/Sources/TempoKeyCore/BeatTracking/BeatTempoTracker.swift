@@ -12,7 +12,7 @@ final class BeatTempoTracker {
     private let hop: Int
     private let ossRate: Double
     private let onset: OnsetDetector
-    private let tempo: TempoTracker
+    private var tempo: TempoTracker
     private let beat: BeatTracker
     private let tempoSamplePeriod: Int   // emit a tempo point every N hops (~0.25 s)
 
@@ -34,8 +34,31 @@ final class BeatTempoTracker {
         let oss = try onset.process(samples, checkCancellation: checkCancellation)
         var times: [Double] = []
         var rawBPM: [Double] = []
+        // Use PCM energy, not onset flux: a sustained tone has low flux but is not silence.
+        let blockSize = max(1, Int(sampleRate * 0.25))
+        var audible: [Bool] = []
+        for start in stride(from: 0, to: samples.count, by: blockSize) {
+            try checkCancellation()
+            let end = min(samples.count, start + blockSize)
+            var sum = 0.0
+            for index in start..<end { let value = Double(samples[index]); sum += value * value }
+            audible.append(sum / Double(end - start) > 1e-12)
+        }
+        var lastAudible = -Int(ossRate * 2)
+        var inSilence = true
+        var supported = [Bool](repeating: false, count: oss.count)
         for (i, v) in oss.enumerated() {
             if i.isMultiple(of: 64) { try checkCancellation() }
+            if audible[min(i * hop / blockSize, audible.count - 1)] { lastAudible = i }
+            let active = i - lastAudible < Int(ossRate)
+            supported[i] = active
+            if !active {
+                if !inSilence { tempo = TempoTracker(ossRate: ossRate) }
+                inSilence = true
+                beat.push(0, beatPeriod: 0)
+                continue
+            }
+            inSilence = false
             tempo.push(v)
             let bpm = tempo.currentBPM
             let T = bpm > 0 ? 60.0 * ossRate / bpm : 0
@@ -55,10 +78,16 @@ final class BeatTempoTracker {
         // The decaying histogram's end-of-song peak is not representative for tempo-changing songs.
         let overall = Self.median(smoothBPM) ?? tempo.currentBPM
         let T = overall > 0 ? 60.0 * ossRate / overall : 0
-        let beats = beat.beatIndices(beatPeriod: T).map { Double($0) / ossRate }
+        let beats = beat.beatIndices(beatPeriod: T).filter { supported[$0] }.map { Double($0) / ossRate }
+        // Agreement with the displayed whole-track estimate, not the last histogram peak.
+        // It is deliberately bounded below certainty: agreement cannot establish correctness.
+        let tolerance = max(3, overall * 0.03)
+        let agreement = Double(smoothBPM.filter { abs($0 - overall) <= tolerance }.count)
+            / Double(max(1, smoothBPM.count))
+        let confidence = 0.95 * agreement * min(1, Double(smoothBPM.count) / 32)
 
         return BeatTempoOutput(overallBPM: overall,
-                               bpmConfidence: tempo.certainty,
+                               bpmConfidence: confidence,
                                tempoSeries: series,
                                beats: beats)
     }

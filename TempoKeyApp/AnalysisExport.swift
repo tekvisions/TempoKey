@@ -67,7 +67,7 @@ private struct ExportReportView: View {
                 Text(overrides.displayedKey(detected: result.overallKey).name).font(.title)
                 Text(overrides.displayedKey(detected: result.overallKey).camelot).font(.title)
             }
-            Text("\(Theme.duration(result.duration)) • \(Int(result.bpmConfidence * 100))% tempo confidence\(overrides.isActive ? " • User corrected" : "")").foregroundStyle(.secondary)
+            Text("\(Theme.duration(result.duration)) • \(Theme.tempoCaption(result.bpmConfidence, overrides: overrides))").foregroundStyle(.secondary)
             Divider()
             Text("Detected tempo").font(.headline)
             TempoTimelineView(series: result.tempoSeries, window: 0...max(result.duration, 0.001))

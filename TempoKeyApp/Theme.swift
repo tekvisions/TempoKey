@@ -14,6 +14,13 @@ enum Theme {
         return String(format: "%.2f", value)
     }
 
+    static func tempoCaption(_ confidence: Double, overrides: DisplayOverrides) -> String {
+        if overrides.manualBPM != nil || overrides.bpmMultiplier != 1 { return "Corrected tempo" }
+        if confidence >= 0.75 { return "Strong tempo evidence" }
+        if confidence >= 0.4 { return "Mixed tempo evidence" }
+        return "Weak tempo evidence"
+    }
+
     struct KeyColor { let hue: Double; let saturation: Double; let brightness: Double }
 
     /// Circle-of-fifths hue; major brighter/less saturated, minor deeper.

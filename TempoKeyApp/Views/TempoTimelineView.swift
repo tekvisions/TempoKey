@@ -33,10 +33,12 @@ struct TempoTimelineView: View {
 
             // the line (draw a hair beyond the window so it doesn't clip mid-edge)
             var path = Path()
-            var started = false
-            for p in series where p.time >= lo - span && p.time <= hi + span {
-                let pt = CGPoint(x: x(p.time), y: y(p.bpm))
-                if started { path.addLine(to: pt) } else { path.move(to: pt); started = true }
+            for run in TempoTimelineData.runs(series) {
+                var started = false
+                for p in run where p.time >= lo - span && p.time <= hi + span {
+                    let pt = CGPoint(x: x(p.time), y: y(p.bpm))
+                    if started { path.addLine(to: pt) } else { path.move(to: pt); started = true }
+                }
             }
             ctx.stroke(path, with: .color(Theme.accent),
                        style: StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))

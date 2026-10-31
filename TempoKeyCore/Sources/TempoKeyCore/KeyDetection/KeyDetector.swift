@@ -77,7 +77,8 @@ final class KeyDetector {
         for (index, r) in raw.enumerated() {
             // Overlapping analysis windows vote on adjacent, disjoint timeline cells.
             let cellEnd = index + 1 < raw.count ? raw[index + 1].start : Double(samples.count) / sampleRate
-            if let last = segments.last, last.key == r.key {
+            if let last = segments.last, last.key == r.key,
+               (last.confidence > 0) == (r.conf > 0) {
                 segments[segments.count-1] = KeySegment(start: last.start, end: cellEnd,
                                                         key: last.key,
                                                         confidence: max(last.confidence, r.conf))
@@ -86,11 +87,11 @@ final class KeyDetector {
             }
         }
         var durationByKey: [String: (MusicalKey, Double)] = [:]
-        for s in segments {
+        for s in segments where s.confidence > 0 {
             let cur = durationByKey[s.key.name]?.1 ?? 0
             durationByKey[s.key.name] = (s.key, cur + (s.end - s.start))
         }
-        let overall = durationByKey.values.max(by: { $0.1 < $1.1 })?.0
+        let overall = durationByKey.values.sorted { $0.0.name < $1.0.name }.max(by: { $0.1 < $1.1 })?.0
             ?? MusicalKey(tonic: .c, mode: .major)
         return KeyAnalysis(overall: overall, segments: segments)
     }

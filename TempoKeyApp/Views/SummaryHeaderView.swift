@@ -15,8 +15,9 @@ struct SummaryHeaderView: View {
                     .font(.system(size: 46, weight: .bold, design: .rounded)).monospacedDigit()
                 HStack(spacing: 6) {
                     Text("BPM").font(.caption2).tracking(2).foregroundStyle(Theme.accent)
-                    Text(state.overrides.isActive ? "· corrected" : "· \(Int((result.bpmConfidence * 100).rounded()))% conf")
+                    Text("· " + Theme.tempoCaption(result.bpmConfidence, overrides: state.overrides))
                         .font(.caption2).foregroundStyle(.secondary)
+                        .help("Agreement among local tempo estimates, not a probability of correctness. Check by ear; half/double-time interpretations are common.")
                 }
             }
             VStack(alignment: .leading, spacing: 2) {

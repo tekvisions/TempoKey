@@ -22,7 +22,7 @@ struct KeyOverviewMinimap: View {
                         let sx0 = CGFloat(seg.start / safeTotal) * size.width
                         let sx1 = CGFloat(seg.end / safeTotal) * size.width
                         let rect = CGRect(x: sx0, y: 0, width: max(0.5, sx1 - sx0), height: size.height)
-                        ctx.fill(Path(rect), with: .color(Theme.color(for: seg.key).opacity(0.85)))
+                        ctx.fill(Path(rect), with: .color((seg.confidence > 0 ? Theme.color(for: seg.key) : Color.secondary).opacity(seg.confidence > 0 ? 0.85 : 0.15)))
                     }
                 }
                 // dim the parts outside the window
@@ -45,6 +45,16 @@ struct KeyOverviewMinimap: View {
                     window = TimelineZoom.center(window, on: t, total: total)
                 }
             )
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Key timeline overview")
+        .accessibilityValue("Visible range \(Theme.duration(window.lowerBound)) to \(Theme.duration(window.upperBound))")
+        .accessibilityAdjustableAction { direction in
+            switch direction {
+            case .increment: window = TimelineZoom.pan(window, byFraction: 0.5, total: total)
+            case .decrement: window = TimelineZoom.pan(window, byFraction: -0.5, total: total)
+            @unknown default: break
+            }
         }
         .frame(height: 22)
         .clipShape(RoundedRectangle(cornerRadius: 4))

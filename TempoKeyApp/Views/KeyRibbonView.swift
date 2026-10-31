@@ -18,9 +18,9 @@ struct KeyRibbonView: View {
                 // confidence is surfaced as opacity: less-certain key segments appear fainter
                 let conf = min(1.0, max(0.0, seg.confidence))
                 ctx.fill(Path(roundedRect: rect, cornerRadius: 2),
-                         with: .color(Theme.color(for: seg.key).opacity(0.5 + 0.5 * conf)))
+                         with: .color((conf > 0 ? Theme.color(for: seg.key) : Color.secondary).opacity(conf > 0 ? 0.5 + 0.5 * conf : 0.15)))
                 if (x1 - x0) > 42 {
-                    ctx.draw(Text(seg.key.name).font(.caption2).foregroundStyle(.white),
+                    ctx.draw(Text(conf > 0 ? seg.key.name : "—").font(.caption2).foregroundStyle(.white),
                              at: CGPoint(x: x0 + 6, y: size.height / 2), anchor: .leading)
                 }
             }

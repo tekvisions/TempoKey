@@ -63,6 +63,10 @@ final class AudioDecoder: AudioDecoding {
         }
 
         var output: [Float] = []
+        // The duration guard above bounds this reservation. Geometric array growth
+        // otherwise briefly retains both old/new PCM buffers for hour-long files.
+        let expectedSamples = min(maxSamples, Int(ceil(Double(file.length) * analysisRate / inFormat.sampleRate)))
+        output.reserveCapacity(expectedSamples)
         let inCap: AVAudioFrameCount = 16384
         guard let inBuf = AVAudioPCMBuffer(pcmFormat: inFormat, frameCapacity: inCap) else {
             throw AudioDecoderError.cannotCreateBuffer
